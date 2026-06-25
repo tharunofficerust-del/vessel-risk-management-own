@@ -2,6 +2,7 @@ package com.tharun.risk_management.service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
@@ -135,6 +136,16 @@ public class VesselService {
 
         return vesselRepository.save(vessel);
     }
+//------------------------ GET Methods ----------------------------------
 
+
+    public List<VesselEntity> getAllVessels() {
+    return vesselRepository.findAll();
+}
+    public VesselEntity getVesselById(Long id) {
+    return vesselRepository.findById(id)
+            .orElseThrow(() ->
+                    new RuntimeException("Vessel not found with id: " + id));
+    }
 
 }

@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-// Dto layer also should have validation annotations to ensure 
+// DTO - layer also should have validation annotations to ensure 
 // that the data being passed from the client is valid before 
 // it reaches the service layer. 
 
