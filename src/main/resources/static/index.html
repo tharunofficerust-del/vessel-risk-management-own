@@ -8,171 +8,162 @@
 
 <body>
 
-<div class="dashboard">
+    <div class="dashboard">
 
-    <header>
-        <h1>
-            🚢 Vessel Risk Management
-            <span class="accent">Dashboard</span>
-        </h1>
-    </header>
+        <header>
+            <h1>
+                🚢 Vessel Risk Management
+                <span class="accent">Dashboard</span>
+            </h1>
+        </header>
 
-    <div class="stats-section">
+        <div class="stats-section">
 
-        <div class="stat-card total-card">
-            <h4>TOTAL VESSELS</h4>
-            <h2 id="totalCount">0</h2>
-        </div>
+            <div class="stat-card total-card">
+                <h4>TOTAL VESSELS</h4>
+                <h2 id="totalCount">0</h2>
+            </div>
 
-        <div class="stat-card delay-card">
-            <h4>TOTAL DELAYS</h4>
-            <h2 id="totalDelayCount">0 hrs</h2>
-        </div>
+            <div class="stat-card delay-card">
+                <h4>TOTAL DELAYS</h4>
+                <h2 id="totalDelayCount">0 hrs</h2>
+            </div>
 
-        <div class="stat-card critical-card">
-            <h4>CRITICAL VESSELS</h4>
-            <h2 id="criticalCount">0</h2>
-        </div>
+            <div class="stat-card critical-card">
+                <h4>CRITICAL VESSELS</h4>
+                <h2 id="criticalCount">0</h2>
+            </div>
 
-        <div class="stat-card avg-card">
-            <h4>AVG DELAY</h4>
-            <h2 id="averageDelayCount">0 hrs</h2>
-        </div>
-
-    </div>
-
-
-    <section class="content-section">
-
-        <!-- LEFT SIDE -->
-
-        <div class="form-card">
-
-            <h2>Add Vessel</h2>
-
-            <input
-                type="text"
-                id="vesselName"
-                placeholder="Vessel Name">
-
-            <select id="cargoType">
-                <option value="GENERAL">GENERAL</option>
-                <option value="HAZARDOUS">HAZARDOUS</option>
-                <option value="REEFER">REEFER</option>
-                <option value="FRAGILE">FRAGILE</option>
-            </select>
-
-            <select id="delayReason">
-                <option value="WEATHER">WEATHER</option>
-                <option value="PORT_CONGESTION">PORT_CONGESTION</option>
-                <option value="MECHANICAL_FAILURE">MECHANICAL_FAILURE</option>
-                <option value="CUSTOMS_DELAY">CUSTOMS_DELAY</option>
-                <option value="CREW_ISSUES">CREW_ISSUES</option>
-            </select>
-
-            <label>ETA</label>
-            <input type="datetime-local" id="eta">
-
-            <label>Arrival Date</label>
-            <input type="datetime-local" id="arrivalDate">
-
-            <label>Departure Date</label>
-            <input type="datetime-local" id="departureDate">
-
-            <button onclick="createVessel()">
-                Create Vessel
-            </button>
+            <div class="stat-card avg-card">
+                <h4>AVG DELAY</h4>
+                <h2 id="averageDelayCount">0 hrs</h2>
+            </div>
 
         </div>
 
 
-        <!-- RIGHT SIDE -->
+        <section class="content-section">
 
-        <div class="table-card">
+            <!-- LEFT SIDE -->
 
-            <div class="table-header">
+            <div class="form-card">
 
-                <div class="table-top-row">
+                <h2>Add Vessel</h2>
 
-                    <h2>Vessel List</h2>
+                <input type="text" id="vesselName" placeholder="Vessel Name">
 
-                    <input
-                        type="text"
-                        id="searchBox"
-                        class="search-box"
-                        placeholder="🔍 Search vessel..."
-                        onkeyup="loadVessels()">
+                <select id="cargoType">
+                    <option value="GENERAL">GENERAL</option>
+                    <option value="HAZARDOUS">HAZARDOUS</option>
+                    <option value="REEFER">REEFER</option>
+                    <option value="FRAGILE">FRAGILE</option>
+                </select>
+
+                <select id="delayReason">
+                    <option value="WEATHER">WEATHER</option>
+                    <option value="PORT_CONGESTION">PORT_CONGESTION</option>
+                    <option value="MECHANICAL_FAILURE">MECHANICAL_FAILURE</option>
+                    <option value="CUSTOMS_DELAY">CUSTOMS_DELAY</option>
+                    <option value="CREW_ISSUES">CREW_ISSUES</option>
+                </select>
+
+                <label>ETA</label>
+                <input type="datetime-local" id="eta">
+
+                <label>Arrival Date</label>
+                <input type="datetime-local" id="arrivalDate">
+
+                <label>Departure Date</label>
+                <input type="datetime-local" id="departureDate">
+
+                <button id="submitBtn" onclick="saveVessel()">
+
+                    Create Vessel
+
+                </button>
+
+                <button id="cancelBtn" class="cancel-btn" onclick="cancelEdit()" style="display:none;">
+
+                    Cancel Edit
+
+                </button>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="table-card">
+
+                <div class="table-header">
+
+                    <div class="table-top-row">
+
+                        <h2>Vessel List</h2>
+
+                        <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search vessel..."
+                            onkeyup="loadVessels()">
+
+                    </div>
+
+
+                    <div class="filter-pills">
+
+                        <button class="filter-pill active" onclick="setRiskFilter('ALL', this)">
+                            All
+                        </button>
+
+                        <button class="filter-pill" onclick="setRiskFilter('LOW', this)">
+                            Low
+                        </button>
+
+                        <button class="filter-pill" onclick="setRiskFilter('MEDIUM', this)">
+                            Medium
+                        </button>
+
+                        <button class="filter-pill" onclick="setRiskFilter('HIGH', this)">
+                            High
+                        </button>
+
+                        <button class="filter-pill" onclick="setRiskFilter('CRITICAL', this)">
+                            Critical
+                        </button>
+
+                    </div>
 
                 </div>
 
 
-                <div class="filter-pills">
+                <div class="table-wrapper">
 
-                    <button
-                        class="filter-pill active"
-                        onclick="setRiskFilter('ALL', this)">
-                        All
-                    </button>
+                    <table>
 
-                    <button
-                        class="filter-pill"
-                        onclick="setRiskFilter('LOW', this)">
-                        Low
-                    </button>
+                        <thead>
 
-                    <button
-                        class="filter-pill"
-                        onclick="setRiskFilter('MEDIUM', this)">
-                        Medium
-                    </button>
+                            <tr>
+                                <th>ID</th>
+                                <th>Vessel</th>
+                                <th>Risk</th>
+                                <th>Delay(h)</th>
+                                <th>Priority</th>
+                                <th>Action</th>
+                            </tr>
 
-                    <button
-                        class="filter-pill"
-                        onclick="setRiskFilter('HIGH', this)">
-                        High
-                    </button>
+                        </thead>
 
-                    <button
-                        class="filter-pill"
-                        onclick="setRiskFilter('CRITICAL', this)">
-                        Critical
-                    </button>
+                        <tbody id="vesselTable">
+
+                        </tbody>
+
+                    </table>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <div class="table-wrapper">
-
-                <table>
-
-                    <thead>
-
-                    <tr>
-                        <th>ID</th>
-                        <th>Vessel</th>
-                        <th>Risk</th>
-                        <th>Priority</th>
-                        <th>Delay</th>
-                        <th>Action</th>
-                    </tr>
-
-                    </thead>
-
-                    <tbody id="vesselTable">
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
-
-    </section>
-
-<!--Analytics section -->
+        <!--Analytics section -->
 
         <section class="analytics-section">
 
@@ -270,11 +261,59 @@
 
         </section>
 
+    </div>
+    <section class="reports-section">
 
+    <div class="reports-card">
 
-</div>
+        <h3>📄 Reports & Export Center</h3>
 
-<script src="app.js"></script>
+        <div class="export-buttons">
+
+            <button class="export-btn"
+                    onclick="exportCSV()">
+
+                Export CSV
+
+            </button>
+
+            <button class="export-btn disabled-btn">
+
+                Export PDF (Coming Soon)
+
+            </button>
+
+        </div>
+
+        <p id="lastExport">
+
+            Last Export: Never
+
+        </p>
+
+    </div>
+
+</section>
+
+    <div id="toast" class="toast"></div>
+    <script src="app.js"></script>
 
 </body>
+
+<footer class="app-footer">
+
+    <h4>
+        🚢 Vessel Risk Management Dashboard
+    </h4>
+
+    <p>
+        Built with Spring Boot • H2 Database • Vanilla JavaScript
+    </p>
+
+    <p class="copyright">
+        © 2026 Tharun Vijay
+    </p>
+
+</footer>
+
 </html>

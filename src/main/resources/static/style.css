@@ -879,3 +879,218 @@ th {
 }
 }
 
+
+.edit-btn {
+
+    background: #4a7fc9;
+
+    color: white;
+
+    width: auto;
+
+    padding: 9px 16px;
+
+    margin-right: 8px;
+
+    box-shadow: 3px 3px 0 #1a1a1a;
+
+}
+
+.edit-btn::before {
+
+    display: none;
+
+}
+
+
+.cancel-btn {
+
+    background: #e8a93d;
+
+    margin-top: 10px;
+
+}
+
+
+.action-buttons {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.toast {
+
+    position: fixed;
+
+    top: 20px;
+    right: 20px;
+
+    min-width: 260px;
+
+    padding: 14px 20px;
+
+    border-radius: 12px;
+
+    color: white;
+
+    font-weight: 600;
+
+    box-shadow: 4px 4px 0 #1a1a1a;
+
+    opacity: 0;
+
+    transform: translateX(100px);
+
+    transition: all 0.3s ease;
+
+    z-index: 9999;
+}
+
+.toast.show {
+
+    opacity: 1;
+
+    transform: translateX(0);
+}
+
+.toast.success {
+
+    background: #2e8b57;
+}
+
+.toast.error {
+
+    background: #d9534f;
+}
+
+.toast.warning {
+
+    background: #f0ad4e;
+}
+
+.reports-section {
+
+    margin-top: 20px;
+    margin-bottom: 30px;
+
+}
+
+
+.reports-card {
+
+    background: #f7f4ea;
+
+    border: 3px solid #1f1f1f;
+
+    border-radius: 18px;
+
+    padding: 20px;
+
+    box-shadow: 4px 4px 0 #1f1f1f;
+
+}
+
+
+.export-buttons {
+
+    display: flex;
+
+    gap: 12px;
+
+    margin: 20px 0;
+
+}
+
+
+.export-btn {
+
+    width: auto;
+
+    padding: 10px 20px;
+
+    background: #2d5a44;
+
+    color: white;
+
+}
+
+
+.disabled-btn {
+
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+}
+
+.app-footer {
+
+    margin-top: 30px;
+
+    margin-bottom: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background: #f7f4ea;
+
+    border: 3px solid #1f1f1f;
+
+    border-radius: 18px;
+
+    box-shadow: 4px 4px 0 #1f1f1f;
+
+}
+
+.app-footer h4 {
+
+    margin-bottom: 10px;
+
+    color: #2d5a44;
+
+    font-size: 18px;
+
+}
+
+.app-footer p {
+
+    margin: 6px 0;
+
+    color: #555;
+
+    font-size: 14px;
+
+}
+
+.copyright {
+
+    margin-top: 12px;
+
+    font-weight: 600;
+
+    color: #888;
+
+}
+@media (max-width: 768px)
+{
+    .app-footer {
+
+    padding: 18px;
+
+}
+
+.app-footer h4 {
+
+    font-size: 16px;
+
+}
+
+.app-footer p {
+
+    font-size: 12px;
+
+}
+}
