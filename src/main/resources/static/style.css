@@ -19,16 +19,33 @@ body {
 }
 
 header {
-    height: 48px;
+    height: 56px;
     display: flex;
     align-items: center;
+    gap: 14px;
+}
+
+header::before {
+    content: "";
+    width: 6px;
+    height: 38px;
+    background: #9fe070;
+    border: 2px solid #1a1a1a;
+    border-radius: 4px;
+    box-shadow: 3px 3px 0 #1a1a1a;
+    flex-shrink: 0;
 }
 
 header h1 {
     color: #1a1a1a;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 800;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+}
+
+header h1 .accent {
+    color: #3d6b52;
 }
 
 /* ---------- Stat cards ---------- */
@@ -433,6 +450,42 @@ tbody tr:hover {
 .badge.low {
     background: #9fe070;
     color: #1a3a0e;
+}
+
+.priority-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 7px;
+    border: 1.5px solid #1a1a1a;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+
+.priority-critical {
+    background: #ff4136;
+    color: #fff;
+}
+
+.priority-high {
+    background: #ff9416;
+    color: #fff;
+}
+
+.priority-medium {
+    background: #ffe14d;
+    color: #5c4a06;
+}
+
+.priority-low {
+    background: #c3f08a;
+    color: #1f4d0e;
+}
+
+/* Fallback for any value outside the four expected levels (e.g. "Urgent") */
+.priority-badge:not(.priority-critical):not(.priority-high):not(.priority-medium):not(.priority-low) {
+    background: #cfe3ff;
+    color: #1a3a6b;
 }
 
 /* ---------- Delete button (utility, not full-width) ---------- */

@@ -38,7 +38,7 @@ async function loadVessels() {
 
                 <td>${vessel.riskLevel}</td>
 
-                <td>${vessel.priorityLevel}</td>
+                <td><span class="priority-badge priority-${vessel.priorityLevel.toLowerCase()}">${vessel.priorityLevel}</span></td>
 
                 <td>${vessel.delayHours} hrs</td>
 
