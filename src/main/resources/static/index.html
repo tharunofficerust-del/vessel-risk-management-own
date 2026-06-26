@@ -11,43 +11,49 @@
 <div class="dashboard">
 
     <header>
-        <h1>🚢 Vessel Risk Management <span class="accent">Dashboard</span></h1>
+        <h1>
+            🚢 Vessel Risk Management
+            <span class="accent">Dashboard</span>
+        </h1>
     </header>
 
-    <section class="stats-section">
+    <div class="stats-section">
 
-        <div class="stat-card">
-            <h3>Total Vessels</h3>
-            <p id="totalCount">0</p>
+        <div class="stat-card total-card">
+            <h4>TOTAL VESSELS</h4>
+            <h2 id="totalCount">0</h2>
         </div>
 
-        <div class="stat-card">
-            <h3>High Risk</h3>
-            <p id="highCount">0</p>
+        <div class="stat-card delay-card">
+            <h4>TOTAL DELAYS</h4>
+            <h2 id="totalDelayCount">0 hrs</h2>
         </div>
 
-        <div class="stat-card">
-            <h3>Critical</h3>
-            <p id="criticalCount">0</p>
+        <div class="stat-card critical-card">
+            <h4>CRITICAL VESSELS</h4>
+            <h2 id="criticalCount">0</h2>
         </div>
 
-        <div class="stat-card">
-            <h3>Low Risk</h3>
-            <p id="lowCount">0</p>
+        <div class="stat-card avg-card">
+            <h4>AVG DELAY</h4>
+            <h2 id="averageDelayCount">0 hrs</h2>
         </div>
 
-    </section>
+    </div>
+
 
     <section class="content-section">
+
+        <!-- LEFT SIDE -->
 
         <div class="form-card">
 
             <h2>Add Vessel</h2>
 
             <input
-                    type="text"
-                    id="vesselName"
-                    placeholder="Vessel Name">
+                type="text"
+                id="vesselName"
+                placeholder="Vessel Name">
 
             <select id="cargoType">
                 <option value="GENERAL">GENERAL</option>
@@ -80,17 +86,69 @@
         </div>
 
 
+        <!-- RIGHT SIDE -->
+
         <div class="table-card">
 
             <div class="table-header">
-                <h2>Vessel List</h2>
+
+                <div class="table-top-row">
+
+                    <h2>Vessel List</h2>
+
+                    <input
+                        type="text"
+                        id="searchBox"
+                        class="search-box"
+                        placeholder="🔍 Search vessel..."
+                        onkeyup="loadVessels()">
+
+                </div>
+
+
+                <div class="filter-pills">
+
+                    <button
+                        class="filter-pill active"
+                        onclick="setRiskFilter('ALL', this)">
+                        All
+                    </button>
+
+                    <button
+                        class="filter-pill"
+                        onclick="setRiskFilter('LOW', this)">
+                        Low
+                    </button>
+
+                    <button
+                        class="filter-pill"
+                        onclick="setRiskFilter('MEDIUM', this)">
+                        Medium
+                    </button>
+
+                    <button
+                        class="filter-pill"
+                        onclick="setRiskFilter('HIGH', this)">
+                        High
+                    </button>
+
+                    <button
+                        class="filter-pill"
+                        onclick="setRiskFilter('CRITICAL', this)">
+                        Critical
+                    </button>
+
+                </div>
+
             </div>
+
 
             <div class="table-wrapper">
 
                 <table>
 
                     <thead>
+
                     <tr>
                         <th>ID</th>
                         <th>Vessel</th>
@@ -99,6 +157,7 @@
                         <th>Delay</th>
                         <th>Action</th>
                     </tr>
+
                     </thead>
 
                     <tbody id="vesselTable">
@@ -113,10 +172,109 @@
 
     </section>
 
+<!--Analytics section -->
+
+        <section class="analytics-section">
+
+            <div class="analytics-card">
+
+                <h3>📊 Risk Analytics</h3>
+
+                <div class="analytics-list">
+
+                    <div>
+                        <span>Low Risk</span>
+                        <strong id="lowRiskCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Medium Risk</span>
+                        <strong id="mediumRiskCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>High Risk</span>
+                        <strong id="highRiskCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Critical Risk</span>
+                        <strong id="criticalRiskCount">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>⏱ Delay Statistics</h3>
+
+                <div class="analytics-list">
+
+                    <div>
+                        <span>Total Delay</span>
+                        <strong id="analyticsTotalDelay">0 hrs</strong>
+                    </div>
+
+                    <div>
+                        <span>Average Delay</span>
+                        <strong id="analyticsAvgDelay">0 hrs</strong>
+                    </div>
+
+                    <div>
+                        <span>Maximum Delay</span>
+                        <strong id="analyticsMaxDelay">0 hrs</strong>
+                    </div>
+
+                    <div>
+                        <span>Minimum Delay</span>
+                        <strong id="analyticsMinDelay">0 hrs</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="analytics-card">
+
+                <h3>🚢 Cargo Distribution</h3>
+
+                <div class="analytics-list">
+
+                    <div>
+                        <span>General</span>
+                        <strong id="generalCargoCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Hazardous</span>
+                        <strong id="hazardousCargoCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Fragile</span>
+                        <strong id="fragileCargoCount">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Reefer</span>
+                        <strong id="reeferCargoCount">0</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
 </div>
 
 <script src="app.js"></script>
 
 </body>
-
 </html>

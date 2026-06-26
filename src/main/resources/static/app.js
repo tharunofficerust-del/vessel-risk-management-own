@@ -1,33 +1,83 @@
 const API = "/api/vessels";
 
+let currentRiskFilter = "ALL";
 
 async function loadVessels() {
 
     const response = await fetch(API);
 
-    const vessels = await response.json();
+    const allVessels = await response.json();
+
+
+    // =========================
+    // DASHBOARD CARDS
+    // =========================
+
+    const totalVessels = allVessels.length;
+
+    const totalDelayHours = allVessels.reduce(
+        (sum, vessel) => sum + vessel.delayHours,
+        0
+    );
+
+    const criticalCount = allVessels.filter(
+        vessel => vessel.riskLevel === "CRITICAL"
+    ).length;
+
+    const averageDelayHours =
+        totalVessels === 0
+            ? 0
+            : Math.round(totalDelayHours / totalVessels);
+
+
+    document.getElementById("totalCount").innerText =
+        totalVessels;
+
+    document.getElementById("totalDelayCount").innerText =
+        `${totalDelayHours} hrs`;
+
+    document.getElementById("criticalCount").innerText =
+        criticalCount;
+
+    document.getElementById("averageDelayCount").innerText =
+        `${averageDelayHours} hrs`;
+
+
+    // =========================
+    // SEARCH + FILTERS
+    // =========================
+
+    let vessels = [...allVessels];
+
+    const searchValue =
+        document
+            .getElementById("searchBox")
+            ?.value
+            .toLowerCase() || "";
+
+    vessels = vessels.filter(vessel =>
+        vessel.vesselName
+            .toLowerCase()
+            .includes(searchValue)
+    );
+
+    if (currentRiskFilter !== "ALL") {
+
+        vessels = vessels.filter(
+            vessel => vessel.riskLevel === currentRiskFilter
+        );
+    }
+
+
+    // =========================
+    // TABLE
+    // =========================
 
     const table = document.getElementById("vesselTable");
 
     table.innerHTML = "";
 
-    let high = 0;
-    let critical = 0;
-    let low = 0;
-
     vessels.forEach(vessel => {
-
-        if (vessel.riskLevel === "HIGH") {
-            high++;
-        }
-
-        if (vessel.riskLevel === "CRITICAL") {
-            critical++;
-        }
-
-        if (vessel.riskLevel === "LOW") {
-            low++;
-        }
 
         table.innerHTML += `
             <tr>
@@ -36,11 +86,15 @@ async function loadVessels() {
 
                 <td>${vessel.vesselName}</td>
 
-                <td>${vessel.riskLevel}</td>
-
-                <td><span class="priority-badge priority-${vessel.priorityLevel.toLowerCase()}">${vessel.priorityLevel}</span></td>
+                <td>
+                    <span class="risk-badge risk-${vessel.riskLevel.toLowerCase()}">
+                        ${vessel.riskLevel}
+                    </span>
+                </td>
 
                 <td>${vessel.delayHours} hrs</td>
+
+                <td>${vessel.priorityLevel}</td>
 
                 <td>
 
@@ -59,17 +113,79 @@ async function loadVessels() {
     });
 
 
-    document.getElementById("totalCount").innerText =
-        vessels.length;
+    // =========================
+// RISK ANALYTICS
+// =========================
 
-    document.getElementById("highCount").innerText =
-        high;
+const lowRisk =
+    allVessels.filter(v => v.riskLevel === "LOW").length;
 
-    document.getElementById("criticalCount").innerText =
-        critical;
+const mediumRisk =
+    allVessels.filter(v => v.riskLevel === "MEDIUM").length;
 
-    document.getElementById("lowCount").innerText =
-        low;
+const highRisk =
+    allVessels.filter(v => v.riskLevel === "HIGH").length;
+
+const criticalRisk =
+    allVessels.filter(v => v.riskLevel === "CRITICAL").length;
+
+
+document.getElementById("lowRiskCount").innerText =
+    lowRisk;
+
+document.getElementById("mediumRiskCount").innerText =
+    mediumRisk;
+
+document.getElementById("highRiskCount").innerText =
+    highRisk;
+
+document.getElementById("criticalRiskCount").innerText =
+    criticalRisk;
+
+
+
+// =========================
+// DELAY ANALYTICS
+// =========================
+
+const maxDelay =
+    Math.max(...allVessels.map(v => v.delayHours));
+
+const minDelay =
+    Math.min(...allVessels.map(v => v.delayHours));
+
+
+document.getElementById("analyticsTotalDelay").innerText =
+    `${totalDelayHours} hrs`;
+
+document.getElementById("analyticsAvgDelay").innerText =
+    `${averageDelayHours} hrs`;
+
+document.getElementById("analyticsMaxDelay").innerText =
+    `${maxDelay} hrs`;
+
+document.getElementById("analyticsMinDelay").innerText =
+    `${minDelay} hrs`;
+
+
+
+// =========================
+// CARGO ANALYTICS
+// =========================
+
+document.getElementById("generalCargoCount").innerText =
+    allVessels.filter(v => v.cargoType === "GENERAL").length;
+
+document.getElementById("hazardousCargoCount").innerText =
+    allVessels.filter(v => v.cargoType === "HAZARDOUS").length;
+
+document.getElementById("fragileCargoCount").innerText =
+    allVessels.filter(v => v.cargoType === "FRAGILE").length;
+
+document.getElementById("reeferCargoCount").innerText =
+    allVessels.filter(v => v.cargoType === "REEFER").length;
+
+    console.log(vessels);
 }
 
 
@@ -121,6 +237,21 @@ async function deleteVessel(id) {
 
         method: "DELETE"
     });
+
+    loadVessels();
+}
+
+
+
+function setRiskFilter(risk, button) {
+
+    currentRiskFilter = risk;
+
+    document
+        .querySelectorAll(".filter-pill")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
 
     loadVessels();
 }
