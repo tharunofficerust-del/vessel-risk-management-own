@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vessel Risk Management</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+    <header>
+        <h1>🚢 Vessel Risk Management Dashboard</h1>
+    </header>
+
+    <section class="stats-section">
+
+        <div class="stat-card">
+            <h3>Total Vessels</h3>
+            <p id="totalCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>High Risk</h3>
+            <p id="highCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Critical</h3>
+            <p id="criticalCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Low Risk</h3>
+            <p id="lowCount">0</p>
+        </div>
+
+    </section>
+
+    <section class="content-section">
+
+        <div class="form-card">
+
+            <h2>Add Vessel</h2>
+
+            <input
+                    type="text"
+                    id="vesselName"
+                    placeholder="Vessel Name">
+
+            <select id="cargoType">
+                <option value="GENERAL">GENERAL</option>
+                <option value="HAZARDOUS">HAZARDOUS</option>
+                <option value="REEFER">REEFER</option>
+                <option value="FRAGILE">FRAGILE</option>
+            </select>
+
+            <select id="delayReason">
+                <option value="WEATHER">WEATHER</option>
+                <option value="PORT_CONGESTION">PORT_CONGESTION</option>
+                <option value="MECHANICAL_FAILURE">MECHANICAL_FAILURE</option>
+                <option value="CUSTOMS_DELAY">CUSTOMS_DELAY</option>
+                <option value="CREW_ISSUES">CREW_ISSUES</option>
+            </select>
+
+            <label>ETA</label>
+            <input type="datetime-local" id="eta">
+
+            <label>Arrival Date</label>
+            <input type="datetime-local" id="arrivalDate">
+
+            <label>Departure Date</label>
+            <input type="datetime-local" id="departureDate">
+
+            <button onclick="createVessel()">
+                Create Vessel
+            </button>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <div class="table-header">
+                <h2>Vessel List</h2>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Vessel</th>
+                        <th>Risk</th>
+                        <th>Priority</th>
+                        <th>Delay</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+
+                    <tbody id="vesselTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
