@@ -803,3 +803,79 @@ tbody tr:hover {
 
     margin-bottom: 20px;
 }
+
+@media (max-width: 1024px) {
+
+    .analytics-section {
+
+        grid-template-columns: repeat(2, 1fr);
+
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .analytics-section {
+
+        grid-template-columns: 1fr;
+
+    }
+    
+}
+
+@media (max-width: 720px) {
+
+    .filter-pills {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .filter-pill {
+        padding: 5px 12px;
+        font-size: 11px;
+    }
+
+    .table-card {
+    padding: 10px;
+}
+
+.table-wrapper {
+    max-height: 400px;
+}
+
+th,
+td {
+    padding: 8px 6px;
+    font-size: 12px;
+}
+
+th {
+    font-size: 11px;
+}
+
+.risk-badge,
+.priority-badge {
+    min-width: 60px;
+    padding: 4px 8px;
+    font-size: 10px;
+}
+
+.delete-btn {
+    padding: 6px 10px;
+    font-size: 11px;
+    box-shadow: 2px 2px 0 #1a1a1a;
+}
+
+.delete-btn::before {
+    width: 12px;
+    height: 12px;
+}
+
+.search-box {
+    width: 100%;
+    font-size: 12px;
+    padding: 8px 10px;
+}
+}
+
