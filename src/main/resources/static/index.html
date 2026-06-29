@@ -64,6 +64,15 @@
                     <option value="FRAGILE">FRAGILE</option>
                 </select>
 
+                <label>🚢 STATUS</label>
+                <select id="status" onchange="handleStatusChange()">
+                    <option value="SCHEDULED">Scheduled</option>
+                    <option value="IN_TRANSIT">In Transit</option>
+                    <option value="DELAYED">Delayed</option>
+                    <option value="ARRIVED">Arrived</option>
+                    <option value="BERTHED">Berthed</option>
+                </select>
+
                 <select id="delayReason">
                     <option value="WEATHER">WEATHER</option>
                     <option value="PORT_CONGESTION">PORT_CONGESTION</option>
@@ -149,6 +158,7 @@
                                 <th>ID</th>
                                 <th>Vessel</th>
                                 <th>Risk</th>
+                                <th>Status</th>
                                 <th>Delay(h)</th>
                                 <th>Priority</th>
                                 <th>Action</th>

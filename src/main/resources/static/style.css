@@ -1374,3 +1374,47 @@ height:180px;
     }
 
 }
+
+/* Status Badges : */
+
+.status-badge {
+
+    display: inline-block;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    color: white;
+
+    text-transform: uppercase;
+}
+
+.status-scheduled {
+
+    background: #f4c542;
+}
+
+.status-in_transit {
+
+    background: #3498db;
+}
+
+.status-delayed {
+
+    background: #e74c3c;
+}
+
+.status-arrived {
+
+    background: #2ecc71;
+}
+
+.status-berthed {
+
+    background: #7f8c8d;
+}

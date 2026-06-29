@@ -213,6 +213,12 @@ async function loadVessels() {
                     </span>
                 </td>
 
+                <td>
+                    <span class="status-badge status-${vessel.status.toLowerCase()}">
+                        ${vessel.status.replace("_", " ")}
+                    </span>
+                </td>
+
                 <td>${vessel.delayHours} hrs</td>
 
                 <td>${vessel.priorityLevel}</td>
@@ -401,6 +407,9 @@ async function saveVessel() {
         delayReason:
             document.getElementById("delayReason").value,
 
+        status:
+            document.getElementById("status").value,
+
         eta:
             document.getElementById("eta").value,
 
@@ -408,7 +417,9 @@ async function saveVessel() {
             document.getElementById("arrivalDate").value,
 
         departureDate:
-            document.getElementById("departureDate").value
+            document.getElementById("departureDate").value,
+
+
     };
 
 
@@ -529,6 +540,8 @@ function setRiskFilter(risk, button) {
 
 loadVessels();
 
+handleStatusChange();
+
 function editVessel(id) {
 
     fetch(`${API}/${id}`)
@@ -548,14 +561,24 @@ function editVessel(id) {
             document.getElementById("delayReason").value =
                 vessel.delayReason;
 
+            document.getElementById("status").value =
+                vessel.status;
+            handleStatusChange();
+
             document.getElementById("eta").value =
-                vessel.eta.substring(0, 16);
+                vessel.eta
+                    ? vessel.eta.substring(0, 16)
+                    : "";
 
             document.getElementById("arrivalDate").value =
-                vessel.arrivalDate.substring(0, 16);
+                vessel.arrivalDate
+                    ? vessel.arrivalDate.substring(0, 16)
+                    : "";
 
             document.getElementById("departureDate").value =
-                vessel.departureDate.substring(0, 16);
+                vessel.departureDate
+                    ? vessel.departureDate.substring(0, 16)
+                    : "";
 
             document.getElementById("submitBtn")
                 .innerText = "Update Vessel";
@@ -602,6 +625,9 @@ function clearForm() {
 
     document.getElementById("departureDate").value = "";
 
+    document.getElementById("status").selectedIndex = 0;
+
+    handleStatusChange();
 
     document.getElementById("submitBtn")
         .innerText = "Create Vessel";
@@ -695,6 +721,43 @@ async function exportCSV() {
             "❌ Export failed",
             "error"
         );
+
+    }
+
+}
+
+//Status Update logic
+
+function handleStatusChange() {
+
+    const status =
+        document.getElementById("status").value;
+
+    const arrivalDate =
+        document.getElementById("arrivalDate");
+
+    const eta =
+        document.getElementById("eta");
+
+    const futureStatuses = [
+
+        "SCHEDULED",
+        "IN_TRANSIT",
+        "DELAYED"
+
+    ];
+
+    if (futureStatuses.includes(status)) {
+
+        arrivalDate.disabled = true;
+        arrivalDate.value = "";
+
+        eta.disabled = false;
+
+    }
+    else {
+
+        arrivalDate.disabled = false;
 
     }
 

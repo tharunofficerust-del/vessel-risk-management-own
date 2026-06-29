@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.tharun.risk_management.enums.CargoType;
 import com.tharun.risk_management.enums.DelayReason;
+import com.tharun.risk_management.enums.VesselStatus;
 import com.tharun.risk_management.exception.ErrorResponse;
 
 import jakarta.validation.constraints.NotBlank;
@@ -40,6 +41,11 @@ public class CreateVesselRequest {
 
     @NotNull(message = "Departure date is required")
     private LocalDateTime departureDate;
+
+
+    @NotNull(message = "Status is required")
+    private VesselStatus status;
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {

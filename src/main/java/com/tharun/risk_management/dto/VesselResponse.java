@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import com.tharun.risk_management.enums.CargoType;
 import com.tharun.risk_management.enums.DelayReason;
 import com.tharun.risk_management.enums.RiskLevel;
+import com.tharun.risk_management.enums.VesselStatus;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,4 +39,6 @@ public class VesselResponse {
     private long portStayHours;
 
     private String priorityLevel;
+
+    private VesselStatus status;
 }

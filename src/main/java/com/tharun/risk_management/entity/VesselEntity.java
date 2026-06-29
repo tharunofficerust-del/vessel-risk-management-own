@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import com.tharun.risk_management.enums.CargoType;
 import com.tharun.risk_management.enums.DelayReason;
 import com.tharun.risk_management.enums.RiskLevel;
+import com.tharun.risk_management.enums.VesselStatus;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Column;
@@ -35,15 +37,19 @@ public class VesselEntity {
     @Column(nullable = false)
     private CargoType cargoType;
 
-    @Enumerated(EnumType.STRING)        //convert enums to string for database storage
+    @Enumerated(EnumType.STRING) // convert enums to string for database storage
     @Column(nullable = false)
     private DelayReason delayReason;
 
     @Enumerated(EnumType.STRING)
     private RiskLevel riskLevel;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private LocalDateTime eta;      //localdatetime is modern and avoids indexing issues with timezones
+    private VesselStatus status;
+
+    @Column(nullable = false)
+    private LocalDateTime eta; // localdatetime is modern and avoids indexing issues with timezones
 
     @Column(nullable = false)
     private LocalDateTime arrivalDate;
@@ -56,7 +62,5 @@ public class VesselEntity {
     private long portStayHours;
 
     private String priorityLevel;
-
-
 
 }
