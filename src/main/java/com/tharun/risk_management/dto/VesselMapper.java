@@ -17,7 +17,7 @@ public class VesselMapper {
         response.setCargoType(vessel.getCargoType());
         response.setDelayReason(vessel.getDelayReason());
         response.setRiskLevel(vessel.getRiskLevel());
-
+        response.setStatus(vessel.getStatus());
         response.setEta(vessel.getEta());
         response.setArrivalDate(vessel.getArrivalDate());
         response.setDepartureDate(vessel.getDepartureDate());
@@ -25,6 +25,7 @@ public class VesselMapper {
         response.setDelayHours(vessel.getDelayHours());
         response.setPortStayHours(vessel.getPortStayHours());
         response.setPriorityLevel(vessel.getPriorityLevel());
+
 
         return response;
     }
@@ -41,7 +42,7 @@ public class VesselMapper {
         vessel.setVesselName(request.getVesselName());
         vessel.setCargoType(request.getCargoType());
         vessel.setDelayReason(request.getDelayReason());
-
+        vessel.setStatus(request.getStatus());
         vessel.setEta(request.getEta());
         vessel.setArrivalDate(request.getArrivalDate());
         vessel.setDepartureDate(request.getDepartureDate());
