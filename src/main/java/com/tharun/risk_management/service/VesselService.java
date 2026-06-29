@@ -37,6 +37,10 @@ public class VesselService {
                         LocalDateTime eta,
                         LocalDateTime arrivalDate) {
 
+                if (eta == null || arrivalDate == null) {
+                        return 0;
+                }
+
                 long delay = Duration.between(eta, arrivalDate).toHours();
 
                 return Math.max(delay, 0);
@@ -45,6 +49,10 @@ public class VesselService {
         private long calculatePortStayHours(
                         LocalDateTime arrivalDate,
                         LocalDateTime departureDate) {
+
+                if (arrivalDate == null || departureDate == null) {
+                        return 0;
+                }
 
                 return Duration.between(
                                 arrivalDate,
@@ -124,13 +132,10 @@ public class VesselService {
                 }
         }
 
-        // ==================== CREATE ====================
+        // Helper for status validations
 
-        public VesselResponse createVessel(
+        private void validateStatusRules(
                         CreateVesselRequest request) {
-
-
-                //rules for status - down
 
                 if ((request.getStatus() == VesselStatus.SCHEDULED
                                 || request.getStatus() == VesselStatus.IN_TRANSIT
@@ -149,11 +154,26 @@ public class VesselService {
                                         "ETA is required for scheduled and in-transit vessels.");
                 }
 
-                if (request.getStatus() == null) {
-                        request.setStatus(VesselStatus.SCHEDULED);
+                if ((request.getStatus() == VesselStatus.ARRIVED
+                                || request.getStatus() == VesselStatus.BERTHED)
+                                && request.getArrivalDate() == null) {
+
+                        throw new BusinessValidationException(
+                                        "Arrival date is required for arrived and berthed vessels.");
                 }
 
-                //rules for status - up ;
+                if (request.getStatus() == null) {
+
+                        request.setStatus(VesselStatus.SCHEDULED);
+                }
+        }
+
+        // ==================== CREATE ====================
+
+        public VesselResponse createVessel(
+                        CreateVesselRequest request) {
+
+                validateStatusRules(request);
 
                 long delayHours = calculateDelayHours(
                                 request.getEta(),
@@ -214,6 +234,8 @@ public class VesselService {
                         Long id,
                         CreateVesselRequest request) {
 
+                validateStatusRules(request);   //validate status
+
                 VesselEntity vessel = vesselRepository
                                 .findById(id)
                                 .orElseThrow(
@@ -223,7 +245,7 @@ public class VesselService {
                 vessel.setVesselName(request.getVesselName());
                 vessel.setCargoType(request.getCargoType());
                 vessel.setDelayReason(request.getDelayReason());
-
+                vessel.setStatus(request.getStatus());
                 vessel.setEta(request.getEta());
                 vessel.setArrivalDate(request.getArrivalDate());
                 vessel.setDepartureDate(request.getDepartureDate());
