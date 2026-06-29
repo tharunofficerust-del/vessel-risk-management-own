@@ -10,7 +10,36 @@ async function loadVessels() {
     const response = await fetch(API);
 
     const allVessels = await response.json();
+    // =========================
+    // NOTIFICATIONS
+    // =========================
 
+    const notifications = [];
+
+    allVessels.forEach(vessel => {
+
+        if (vessel.riskLevel === "CRITICAL") {
+
+            notifications.push(
+                `🚨 ${vessel.vesselName} requires immediate attention`
+            );
+        }
+
+        else if (vessel.riskLevel === "HIGH") {
+
+            notifications.push(
+                `⚠ ${vessel.vesselName} has high operational risk`
+            );
+        }
+
+        if (vessel.delayHours > 48) {
+
+            notifications.push(
+                `⏰ ${vessel.vesselName} delayed by ${vessel.delayHours} hours`
+            );
+        }
+
+    });
 
     // =========================
     // DASHBOARD CARDS
@@ -45,7 +74,36 @@ async function loadVessels() {
     document.getElementById("averageDelayCount").innerText =
         `${averageDelayHours} hrs`;
 
+    const notificationList =
+        document.getElementById("notificationList");
 
+    if (notificationList) {
+
+        if (notifications.length === 0) {
+
+            notificationList.innerHTML =
+                "<p>✅ No active notifications</p>";
+        }
+
+        else {
+
+            notificationList.innerHTML =
+                notifications
+                    .slice(0, 5)
+                    .map(notification =>
+
+                        `<div class="notification-item">
+
+                        ${notification}
+
+                    </div>`
+
+                    )
+                    .join("");
+
+        }
+
+    }
     // =========================
     // SEARCH + FILTERS
     // =========================
