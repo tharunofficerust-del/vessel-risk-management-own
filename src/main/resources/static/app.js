@@ -42,6 +42,66 @@ async function loadVessels() {
     });
 
     // =========================
+    // UPCOMING ARRIVALS
+    // =========================
+
+    const upcomingArrivals = [...allVessels]
+
+        .filter(vessel => vessel.eta)
+
+        .sort((a, b) =>
+
+            new Date(a.eta) - new Date(b.eta)
+
+        )
+
+        .slice(0, 5);
+
+
+    const arrivalList =
+        document.getElementById("arrivalList");
+
+
+    if (arrivalList) {
+
+        if (upcomingArrivals.length === 0) {
+
+            arrivalList.innerHTML =
+                "<p>No upcoming arrivals</p>";
+
+        }
+
+        else {
+
+            arrivalList.innerHTML =
+
+                upcomingArrivals.map(vessel => `
+
+                <div class="arrival-item">
+
+                    <strong>
+
+                        🚢 ${vessel.vesselName}
+
+                    </strong>
+
+                    <span>
+
+                        ETA:
+
+                        ${new Date(vessel.eta)
+                        .toLocaleString()}
+
+                    </span>
+
+                </div>
+
+            `).join("");
+
+        }
+
+    }
+    // =========================
     // DASHBOARD CARDS
     // =========================
 
