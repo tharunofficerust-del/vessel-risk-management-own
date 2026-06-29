@@ -3,6 +3,7 @@ const API = "/api/vessels";
 let currentRiskFilter = "ALL";
 
 let editId = null;
+let riskChart = null;
 
 async function loadVessels() {
 
@@ -156,6 +157,71 @@ async function loadVessels() {
     document.getElementById("criticalRiskCount").innerText =
         criticalRisk;
 
+
+    // =========================
+    // RISK CHART
+    // =========================
+
+    const chartCanvas =
+        document.getElementById("riskChart");
+
+    if (chartCanvas) {
+
+        if (riskChart) {
+            riskChart.destroy();
+        }
+
+        const ctx =
+            chartCanvas.getContext("2d");
+
+        riskChart = new Chart(ctx, {
+
+            type: "doughnut",
+
+            data: {
+
+                labels: [
+                    "Low",
+                    "Medium",
+                    "High",
+                    "Critical"
+                ],
+
+                datasets: [{
+
+                    data: [
+                        lowRisk,
+                        mediumRisk,
+                        highRisk,
+                        criticalRisk
+                    ],
+
+                    backgroundColor: [
+                        "#7BC043",
+                        "#F4C542",
+                        "#F39C12",
+                        "#E74C3C"
+                    ],
+
+                    borderWidth: 2
+                }]
+            },
+
+            options: {
+
+                responsive: true,
+
+                maintainAspectRatio: false,
+
+                plugins: {
+
+                    legend: {
+                        position: "bottom"
+                    }
+                }
+            }
+        });
+    }
 
 
     // =========================
@@ -518,7 +584,7 @@ async function exportCSV() {
 
 //Chart js
 
-let riskChart = null;
+
 if (riskChart) {
     riskChart.destroy();
 }
