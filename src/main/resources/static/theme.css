@@ -103,3 +103,9 @@ body.dark-mode .footer {
     color: #CCC;
 
 }
+
+body.dark-mode .form-section {
+
+    background: #2B313A;
+
+}
