@@ -630,6 +630,7 @@ tbody tr:hover {
     font-weight: 800;
     color: #2f5d50;
     line-height: 1.1;
+    width: auto;
 }
 
 .header-tag {
