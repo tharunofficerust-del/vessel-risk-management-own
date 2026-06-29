@@ -33,10 +33,10 @@ public class CreateVesselRequest {
     @NotNull(message = "Delay reason is required")
     private DelayReason delayReason;
 
-    @NotNull(message = "ETA is required")
+    //@NotNull(message = "ETA is required")
     private LocalDateTime eta;
 
-    @NotNull(message = "Arrival date is required")
+    //@NotNull(message = "Arrival date is required")
     private LocalDateTime arrivalDate;
 
     @NotNull(message = "Departure date is required")

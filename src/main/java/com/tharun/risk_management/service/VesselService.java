@@ -11,11 +11,13 @@ import com.tharun.risk_management.dto.VesselMapper;
 import com.tharun.risk_management.dto.VesselResponse;
 import com.tharun.risk_management.entity.VesselEntity;
 import com.tharun.risk_management.enums.CargoType;
+import com.tharun.risk_management.enums.DelayReason;
 import com.tharun.risk_management.enums.RiskLevel;
 import com.tharun.risk_management.enums.VesselStatus;
 import com.tharun.risk_management.exception.BusinessValidationException;
 import com.tharun.risk_management.exception.ResourceNotFoundException;
 import com.tharun.risk_management.repository.VesselRepository;
+
 
 @Service
 public class VesselService {
@@ -179,16 +181,33 @@ public class VesselService {
                                 request.getEta(),
                                 request.getArrivalDate());
 
+                // NO_DELAY means no actual delay
+                if (request.getDelayReason() == DelayReason.NO_DELAY) {
+                        delayHours = 0;
+                }
+
                 long portStayHours = calculatePortStayHours(
                                 request.getArrivalDate(),
                                 request.getDepartureDate());
 
-                RiskLevel riskLevel = determineRiskLevel(
-                                request.getCargoType(),
-                                delayHours);
+                RiskLevel riskLevel;
 
-                String priorityLevel = determinePriorityLevel(
-                                request.getCargoType());
+                String priorityLevel;
+
+                if (request.getDelayReason() == DelayReason.NO_DELAY) {
+
+                        riskLevel = RiskLevel.NONE;
+                        priorityLevel = "None";
+
+                } else {
+
+                        riskLevel = determineRiskLevel(
+                                        request.getCargoType(),
+                                        delayHours);
+
+                        priorityLevel = determinePriorityLevel(
+                                        request.getCargoType());
+                }
 
                 VesselEntity vessel = vesselMapper.toEntity(
                                 request,
@@ -234,7 +253,7 @@ public class VesselService {
                         Long id,
                         CreateVesselRequest request) {
 
-                validateStatusRules(request);   //validate status
+                validateStatusRules(request); // validate status
 
                 VesselEntity vessel = vesselRepository
                                 .findById(id)
@@ -254,6 +273,11 @@ public class VesselService {
                                 request.getEta(),
                                 request.getArrivalDate());
 
+                // NO_DELAY means no actual delay
+                if (request.getDelayReason() == DelayReason.NO_DELAY) {
+                        delayHours = 0;
+                }
+
                 long portStayHours = calculatePortStayHours(
                                 request.getArrivalDate(),
                                 request.getDepartureDate());
@@ -261,14 +285,22 @@ public class VesselService {
                 vessel.setDelayHours(delayHours);
                 vessel.setPortStayHours(portStayHours);
 
-                vessel.setRiskLevel(
-                                determineRiskLevel(
-                                                request.getCargoType(),
-                                                delayHours));
+                if (request.getDelayReason() == DelayReason.NO_DELAY) {
 
-                vessel.setPriorityLevel(
-                                determinePriorityLevel(
-                                                request.getCargoType()));
+                        vessel.setRiskLevel(RiskLevel.NONE);
+                        vessel.setPriorityLevel("None");
+
+                } else {
+
+                        vessel.setRiskLevel(
+                                        determineRiskLevel(
+                                                        request.getCargoType(),
+                                                        delayHours));
+
+                        vessel.setPriorityLevel(
+                                        determinePriorityLevel(
+                                                        request.getCargoType()));
+                }
 
                 VesselEntity updatedVessel = vesselRepository.save(vessel);
 

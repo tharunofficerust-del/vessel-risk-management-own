@@ -46,13 +46,13 @@ async function loadVessels() {
     // =========================
 
     const upcomingArrivals = [...allVessels]
-
-        .filter(vessel => vessel.eta)
+        .filter(vessel =>
+            vessel.status === "IN_TRANSIT"
+            && vessel.eta
+        )
 
         .sort((a, b) =>
-
             new Date(a.eta) - new Date(b.eta)
-
         )
 
         .slice(0, 5);
@@ -88,11 +88,17 @@ async function loadVessels() {
                     <span>
 
                         ETA:
-
                         ${new Date(vessel.eta)
-                        .toLocaleString()}
+                        .toLocaleDateString()}
 
                     </span>
+
+                    <small>
+
+                        Status:
+                        ${vessel.status.replace("_", " ")}
+
+                    </small>
 
                 </div>
 
@@ -208,8 +214,8 @@ async function loadVessels() {
                 <td>${vessel.vesselName}</td>
 
                 <td>
-                    <span class="risk-badge risk-${vessel.riskLevel.toLowerCase()}">
-                        ${vessel.riskLevel}
+                    <span class="risk-badge risk-${(vessel.riskLevel || "NONE").toLowerCase()}">
+                        ${vessel.riskLevel || "NONE"}
                     </span>
                 </td>
 
@@ -255,6 +261,8 @@ async function loadVessels() {
     // =========================
     // RISK ANALYTICS
     // =========================
+    const noneRisk =
+        allVessels.filter(v => v.riskLevel === "NONE").length;
 
     const lowRisk =
         allVessels.filter(v => v.riskLevel === "LOW").length;
@@ -269,6 +277,9 @@ async function loadVessels() {
         allVessels.filter(v => v.riskLevel === "CRITICAL").length;
 
 
+    document.getElementById("noneRiskCount").innerText =
+        noneRisk;
+
     document.getElementById("lowRiskCount").innerText =
         lowRisk;
 
@@ -281,6 +292,51 @@ async function loadVessels() {
     document.getElementById("criticalRiskCount").innerText =
         criticalRisk;
 
+
+    // =========================
+    // STATUS ANALYTICS
+    // =========================
+
+    const scheduledCount =
+        allVessels.filter(
+            v => v.status === "SCHEDULED"
+        ).length;
+
+    const transitCount =
+        allVessels.filter(
+            v => v.status === "IN_TRANSIT"
+        ).length;
+
+    const delayedCount =
+        allVessels.filter(
+            v => v.status === "DELAYED"
+        ).length;
+
+    const arrivedCount =
+        allVessels.filter(
+            v => v.status === "ARRIVED"
+        ).length;
+
+    const berthedCount =
+        allVessels.filter(
+            v => v.status === "BERTHED"
+        ).length;
+
+
+    document.getElementById("scheduledCount").innerText =
+        scheduledCount;
+
+    document.getElementById("transitCount").innerText =
+        transitCount;
+
+    document.getElementById("delayedCount").innerText =
+        delayedCount;
+
+    document.getElementById("arrivedCount").innerText =
+        arrivedCount;
+
+    document.getElementById("berthedCount").innerText =
+        berthedCount;
 
     // =========================
     // RISK CHART
