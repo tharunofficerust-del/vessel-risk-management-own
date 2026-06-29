@@ -1136,17 +1136,24 @@ th {
     }
 }
 
-#riskChart {
-    max-width: 220px;
-    max-height: 220px;
-    margin: 20px auto;
-    display: block;
+/*Chart js*/
+
+.chart-container {
+    width: 220px;
+    height: 220px;
+    margin: 20px auto 0;
+    position: relative;
 }
+
+#riskChart {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 @media (max-width: 768px) {
 
-    #riskChart {
-
-        max-width: 180px;
-        max-height: 180px;
+    .chart-container {
+        width: 180px;
+        height: 180px;
     }
 }
