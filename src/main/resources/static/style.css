@@ -608,33 +608,41 @@ tbody tr:hover {
 }
 
 .header {
-    margin-bottom: 20px;
-}
-
-.title-group {
     display: flex;
     align-items: center;
     gap: 14px;
+    margin-bottom: 18px;
 }
 
-.title-icon {
-    font-size: 28px;
+.header-accent {
+    width: 8px;
+    height: 52px;
+    background: #8ed46c;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0 #1a1a1a;
+    flex-shrink: 0;
 }
 
-.header h1 {
+.header-content h1 {
     margin: 0;
-    font-size: 2rem;
+    font-size: 32px;
+    font-weight: 800;
     color: #2f5d50;
+    line-height: 1.1;
+}
+
+.header-tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 4px 12px;
+    background: #f3efe4;
+    border: 2px solid #1a1a1a;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 700;
+    color: #4f5d75;
 }
-
-.subtitle {
-    margin: 2px 0 0;
-    color: #6b7280;
-    font-size: 0.95rem;
-    font-weight: 500;
-}
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1024px) {
