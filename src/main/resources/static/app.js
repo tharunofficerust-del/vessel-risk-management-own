@@ -266,7 +266,7 @@ async function saveVessel() {
             "success"
         );
 
-        loadVessels();
+        await loadVessels();
 
         clearForm();
 
@@ -313,7 +313,7 @@ async function deleteVessel(id) {
             "warning"
         );
 
-        loadVessels();
+        await loadVessels();
 
     }
     catch (error) {
