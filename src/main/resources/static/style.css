@@ -884,46 +884,68 @@ tbody tr:hover {
     }
 
     .table-card {
-    padding: 10px;
-}
+        padding: 10px;
+    }
 
-.table-wrapper {
-    max-height: 400px;
-}
+    .table-wrapper {
+        max-height: 400px;
+        overflow-x: auto;
+    }
 
-th,
-td {
-    padding: 8px 6px;
-    font-size: 12px;
-}
+    table {
+        min-width: 720px;
+    }
 
-th {
-    font-size: 11px;
-}
+    th,
+    td {
+        padding: 8px 6px;
+        font-size: 12px;
+    }
 
-.risk-badge,
-.priority-badge {
-    min-width: 60px;
-    padding: 4px 8px;
-    font-size: 10px;
-}
+    th {
+        font-size: 11px;
+    }
 
-.delete-btn {
-    padding: 6px 10px;
-    font-size: 11px;
-    box-shadow: 2px 2px 0 #1a1a1a;
-}
+    /* Hide header icons only on mobile */
+    thead th::before {
+        display: none !important;
+    }
 
-.delete-btn::before {
-    width: 12px;
-    height: 12px;
-}
+    .risk-badge,
+    .priority-badge {
+        min-width: 60px;
+        padding: 4px 8px;
+        font-size: 10px;
+    }
 
-.search-box {
-    width: 100%;
-    font-size: 12px;
-    padding: 8px 10px;
-}
+    .action-buttons {
+        display: flex;
+        gap: 6px;
+        flex-wrap: nowrap;
+    }
+
+    .edit-btn,
+    .delete-btn {
+        width: 72px !important;
+        min-width: 72px;
+        height: 36px;
+        padding: 0;
+        margin: 0;
+        font-size: 11px;
+        justify-content: center;
+        box-shadow: 2px 2px 0 #1a1a1a;
+    }
+
+    .delete-btn::before {
+        width: 12px;
+        height: 12px;
+    }
+
+    .search-box {
+        width: 100%;
+        font-size: 12px;
+        padding: 8px 10px;
+    }
 }
 
 
@@ -1134,23 +1156,6 @@ th {
         grid-template-columns: repeat(2, 1fr);
 
     }
-}
-
-.action-buttons {
-
-    display: flex;
-
-    gap: 8px;
-
-    flex-wrap: nowrap;
-}
-
-.edit-btn,
-.delete-btn {
-
-    width: auto !important;
-
-    flex: 0 0 auto;
 }
 
 /*Chart js*/
