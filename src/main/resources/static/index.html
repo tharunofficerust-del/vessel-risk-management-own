@@ -177,6 +177,8 @@
             </div>
 
         </section>
+
+
         <!--Notification section -->
 
         <div class="info-section">
@@ -216,180 +218,188 @@
 
         </div>
 
-        <!--Analytics section -->
 
-        <section class="analytics-section">
 
-            <div class="analytics-card">
+        <div class="bottom-dashboard">
 
-                <h3>📊 Risk Analytics</h3>
+            <!--Analytics section -->
 
-                <div class="analytics-list">
-                    <div>
-                        <span>No Risk</span>
-                        <strong id="noneRiskCount">0</strong>
+            <section class="analytics-section">
+
+                <div class="analytics-card">
+
+                    <h3>📊 Risk Analytics</h3>
+
+                    <div class="analytics-list">
+                        <div>
+                            <span>No Risk</span>
+                            <strong id="noneRiskCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Low Risk</span>
+                            <strong id="lowRiskCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Medium Risk</span>
+                            <strong id="mediumRiskCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>High Risk</span>
+                            <strong id="highRiskCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Critical Risk</span>
+                            <strong id="criticalRiskCount">0</strong>
+                        </div>
+
                     </div>
+                    <div class="chart-wrapper">
 
-                    <div>
-                        <span>Low Risk</span>
-                        <strong id="lowRiskCount">0</strong>
-                    </div>
+                        <canvas id="riskChart"></canvas>
 
-                    <div>
-                        <span>Medium Risk</span>
-                        <strong id="mediumRiskCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>High Risk</span>
-                        <strong id="highRiskCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Critical Risk</span>
-                        <strong id="criticalRiskCount">0</strong>
-                    </div>
-
-                </div>
-                <div class="chart-wrapper">
-
-                    <canvas id="riskChart"></canvas>
-
-                </div>
-
-            </div>
-
-            <div class="analytics-card">
-
-                <h3>🚢 Vessel Status</h3>
-
-                <div class="analytics-list">
-
-                    <div>
-                        <span>Scheduled</span>
-                        <strong id="scheduledCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>In Transit</span>
-                        <strong id="transitCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Delayed</span>
-                        <strong id="delayedCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Arrived</span>
-                        <strong id="arrivedCount">0</strong>
-                    </div>
-
-                    <div>
-                        <span>Berthed</span>
-                        <strong id="berthedCount">0</strong>
                     </div>
 
                 </div>
 
-            </div>
+                <div class="analytics-card">
 
+                    <h3>🚢 Vessel Status</h3>
 
-            <div class="analytics-card">
+                    <div class="analytics-list">
 
-                <h3>⏱ Delay Statistics</h3>
+                        <div>
+                            <span>Scheduled</span>
+                            <strong id="scheduledCount">0</strong>
+                        </div>
 
-                <div class="analytics-list">
+                        <div>
+                            <span>In Transit</span>
+                            <strong id="transitCount">0</strong>
+                        </div>
 
-                    <div>
-                        <span>Total Delay</span>
-                        <strong id="analyticsTotalDelay">0 hrs</strong>
+                        <div>
+                            <span>Delayed</span>
+                            <strong id="delayedCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Arrived</span>
+                            <strong id="arrivedCount">0</strong>
+                        </div>
+
+                        <div>
+                            <span>Berthed</span>
+                            <strong id="berthedCount">0</strong>
+                        </div>
+
                     </div>
 
-                    <div>
-                        <span>Average Delay</span>
-                        <strong id="analyticsAvgDelay">0 hrs</strong>
-                    </div>
+                </div>
 
-                    <div>
-                        <span>Maximum Delay</span>
-                        <strong id="analyticsMaxDelay">0 hrs</strong>
-                    </div>
 
-                    <div>
-                        <span>Minimum Delay</span>
-                        <strong id="analyticsMinDelay">0 hrs</strong>
+                <div class="analytics-card">
+
+                    <h3>⏱ Delay Statistics</h3>
+
+                    <div class="analytics-list">
+
+                        <div>
+                            <span>Total Delay</span>
+                            <strong id="analyticsTotalDelay">0 hrs</strong>
+                        </div>
+
+                        <div>
+                            <span>Average Delay</span>
+                            <strong id="analyticsAvgDelay">0 hrs</strong>
+                        </div>
+
+                        <div>
+                            <span>Maximum Delay</span>
+                            <strong id="analyticsMaxDelay">0 hrs</strong>
+                        </div>
+
+                        <div>
+                            <span>Minimum Delay</span>
+                            <strong id="analyticsMinDelay">0 hrs</strong>
+                        </div>
+
                     </div>
 
                 </div>
 
-            </div>
 
+                <div class="analytics-card">
 
-            <div class="analytics-card">
+                    <h3>🚢 Cargo Distribution</h3>
 
-                <h3>🚢 Cargo Distribution</h3>
+                    <div class="analytics-list">
 
-                <div class="analytics-list">
+                        <div>
+                            <span>General</span>
+                            <strong id="generalCargoCount">0</strong>
+                        </div>
 
-                    <div>
-                        <span>General</span>
-                        <strong id="generalCargoCount">0</strong>
-                    </div>
+                        <div>
+                            <span>Hazardous</span>
+                            <strong id="hazardousCargoCount">0</strong>
+                        </div>
 
-                    <div>
-                        <span>Hazardous</span>
-                        <strong id="hazardousCargoCount">0</strong>
-                    </div>
+                        <div>
+                            <span>Fragile</span>
+                            <strong id="fragileCargoCount">0</strong>
+                        </div>
 
-                    <div>
-                        <span>Fragile</span>
-                        <strong id="fragileCargoCount">0</strong>
-                    </div>
+                        <div>
+                            <span>Reefer</span>
+                            <strong id="reeferCargoCount">0</strong>
+                        </div>
 
-                    <div>
-                        <span>Reefer</span>
-                        <strong id="reeferCargoCount">0</strong>
                     </div>
 
                 </div>
+
+            </section>
+
+        </div>
+        <section class="reports-section">
+
+            <div class="reports-card">
+
+                <h3>📄 Reports & Export Center</h3>
+
+                <div class="export-buttons">
+
+                    <button class="export-btn" onclick="exportCSV()">
+
+                        Export CSV
+
+                    </button>
+
+                    <button class="export-btn disabled-btn">
+
+                        Export PDF (Coming Soon)
+
+                    </button>
+
+                </div>
+
+                <p id="lastExport">
+
+                    Last Export: Never
+
+                </p>
 
             </div>
 
         </section>
 
     </div>
-    <section class="reports-section">
 
-        <div class="reports-card">
 
-            <h3>📄 Reports & Export Center</h3>
-
-            <div class="export-buttons">
-
-                <button class="export-btn" onclick="exportCSV()">
-
-                    Export CSV
-
-                </button>
-
-                <button class="export-btn disabled-btn">
-
-                    Export PDF (Coming Soon)
-
-                </button>
-
-            </div>
-
-            <p id="lastExport">
-
-                Last Export: Never
-
-            </p>
-
-        </div>
-
-    </section>
 
     <div id="toast" class="toast"></div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
