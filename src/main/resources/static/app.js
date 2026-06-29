@@ -515,3 +515,61 @@ async function exportCSV() {
     }
 
 }
+
+//Chart js
+
+let riskChart = null;
+if (riskChart) {
+    riskChart.destroy();
+}
+
+const ctx =
+    document
+        .getElementById("riskChart")
+        .getContext("2d");
+
+riskChart = new Chart(ctx, {
+
+    type: "doughnut",
+
+    data: {
+
+        labels: [
+            "Low",
+            "Medium",
+            "High",
+            "Critical"
+        ],
+
+        datasets: [{
+
+            data: [
+                lowRisk,
+                mediumRisk,
+                highRisk,
+                criticalRisk
+            ],
+
+            backgroundColor: [
+                "#6BBF59",  // Low
+                "#E6C34D",  // Medium
+                "#E67E22",  // High
+                "#D9534F"   // Critical
+            ],
+
+            borderWidth: 2
+        }]
+    },
+
+    options: {
+
+        responsive: true,
+
+        plugins: {
+
+            legend: {
+                position: "bottom"
+            }
+        }
+    }
+});

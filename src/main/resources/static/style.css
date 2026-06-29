@@ -1135,3 +1135,17 @@ th {
 
     }
 }
+
+#riskChart {
+    margin-top: 20px;
+    max-height: 180px;
+}
+@media (max-width: 768px) {
+
+    #riskChart {
+
+        max-width: 180px;
+        max-height: 180px;
+    }
+
+}
