@@ -1543,3 +1543,192 @@ height:180px;
     }
 
 }
+
+/*------------------------ Visual improvements -----------------------------------*/
+
+.analytics-card,
+.notifications-card,
+.upcoming-card,
+.reports-card {
+
+    position: relative;
+    overflow: hidden;
+
+}
+/* Risk */
+.risk-section h3 {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Status */
+.top-right .analytics-card:nth-child(1) h3 {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+/* Delay */
+.top-right .analytics-card:nth-child(2) h3 {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+/* Cargo */
+.bottom-right .analytics-card h3 {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+/* Reports */
+.reports-card h3 {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
+/* Notifications */
+.notifications-card h3 {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+/* Upcoming */
+.upcoming-card h3 {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Risk counts */
+
+#noneRiskCount {
+
+    color: #757575;
+
+}
+
+#lowRiskCount {
+
+    color: #4caf50;
+
+}
+
+#mediumRiskCount {
+
+    color: #fbc02d;
+
+}
+
+#highRiskCount {
+
+    color: #fb8c00;
+
+}
+
+#criticalRiskCount {
+
+    color: #e53935;
+
+}
+
+#scheduledCount {
+
+    color: #fbc02d;
+
+}
+
+#transitCount {
+
+    color: #2196f3;
+
+}
+
+#delayedCount {
+
+    color: #f44336;
+
+}
+
+#arrivedCount {
+
+    color: #2ecc71;
+
+}
+
+#berthedCount {
+
+    color: #607d8b;
+
+}
+
+#generalCargoCount {
+
+    color: #2e7d32;
+
+}
+
+#hazardousCargoCount {
+
+    color: #c62828;
+
+}
+
+#fragileCargoCount {
+
+    color: #ff9800;
+
+}
+
+#reeferCargoCount {
+
+    color: #00acc1;
+
+}
+
+.analytics-card h3,
+.notifications-card h3,
+.upcoming-card h3,
+.reports-card h3 {
+
+    padding-bottom: 10px;
+    border-bottom: 3px solid #2d7a57;
+}
+/* Risk */
+.risk-section h3 {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+/* Status */
+.top-right .analytics-card:nth-child(1) h3 {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+/* Delay */
+.top-right .analytics-card:nth-child(2) h3 {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+/* Cargo */
+.bottom-right .analytics-card h3 {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+/* Reports */
+.reports-card h3 {
+    background: #e0f2f1;
+    color: #00695c;
+}
+
+/* Notifications */
+.notifications-card h3 {
+    background: #fff8e1;
+    color: #f57f17;
+}
+
+/* Upcoming */
+.upcoming-card h3 {
+    background: #ffebee;
+    color: #c62828;
+}
