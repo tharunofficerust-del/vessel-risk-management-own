@@ -1087,16 +1087,12 @@ tbody tr:hover {
     cursor: not-allowed;
 
 }
-
+/* ------------------- Footer - start - down -------------------------- */
 .footer {
 
-    width: fit-content;
+    margin-top: 24px;
 
-    max-width: 90%;
-
-    margin: 24px auto 0;
-
-    padding: 16px 24px;
+    padding: 14px;
 
     text-align: center;
 
@@ -1109,32 +1105,34 @@ tbody tr:hover {
     box-shadow: 4px 4px 0 #1a1a1a;
 
     color: #2f5d50;
+
+    width: 100%;
+
+    max-width: 100%;
+
+    box-sizing: border-box;
 }
 
 .footer p {
 
     margin: 4px 0;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 600;
 
     line-height: 1.5;
 
-    word-break: break-word;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
 
     .footer {
 
-        width: calc(100% - 28px);
+        margin-top: 18px;
 
-        max-width: 420px;
-
-        margin: 20px auto;
-
-        padding: 12px;
+        padding: 10px;
 
         border-radius: 12px;
 
@@ -1143,12 +1141,16 @@ tbody tr:hover {
 
     .footer p {
 
-        font-size: 11px;
+        font-size: 10px;
 
         line-height: 1.4;
+
+        word-break: break-word;
     }
+
 }
 
+/* ------------------- Footer - end - up-------------------------- */
 .main-content {
 
     display: flex;
