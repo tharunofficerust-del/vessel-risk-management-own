@@ -1136,24 +1136,39 @@ th {
     }
 }
 
-/*Chart js*/
+.action-buttons {
 
-.chart-container {
-    width: 220px;
-    height: 220px;
-    margin: 20px auto 0;
-    position: relative;
+    display: flex;
+
+    gap: 8px;
+
+    flex-wrap: nowrap;
 }
 
+.edit-btn,
+.delete-btn {
+
+    width: auto !important;
+
+    flex: 0 0 auto;
+}
+
+/*Chart js*/
 #riskChart {
-    width: 100% !important;
-    height: 100% !important;
+
+    max-width: 220px;
+    max-height: 220px;
+
+    margin: 20px auto;
+
+    display: block;
 }
 
 @media (max-width: 768px) {
 
-    .chart-container {
-        width: 180px;
-        height: 180px;
+    #riskChart {
+
+        max-width: 180px;
+        max-height: 180px;
     }
 }
