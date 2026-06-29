@@ -1137,10 +1137,10 @@ th {
 }
 
 #riskChart {
-    width: 100%;
-    max-width: 200px;
-    height: 200px;
-    margin: 20px auto 0;
+    max-width: 220px;
+    max-height: 220px;
+    margin: 20px auto;
+    display: block;
 }
 @media (max-width: 768px) {
 
@@ -1149,5 +1149,4 @@ th {
         max-width: 180px;
         max-height: 180px;
     }
-
 }

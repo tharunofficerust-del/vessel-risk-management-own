@@ -211,7 +211,7 @@ async function loadVessels() {
 
                 responsive: true,
 
-                maintainAspectRatio: false,
+                maintainAspectRatio: true,
 
                 plugins: {
 
