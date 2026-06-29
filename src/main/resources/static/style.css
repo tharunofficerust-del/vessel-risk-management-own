@@ -607,6 +607,34 @@ tbody tr:hover {
     background: transparent;
 }
 
+.header {
+    margin-bottom: 20px;
+}
+
+.title-group {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.title-icon {
+    font-size: 28px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #2f5d50;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 2px 0 0;
+    color: #6b7280;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 1024px) {

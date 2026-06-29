@@ -11,11 +11,17 @@
 
     <div class="dashboard">
 
-        <header>
-            <h1>
-                🚢 Vessel Risk Management
-                <span class="accent">Dashboard</span>
-            </h1>
+        <header class="header">
+            <div class="title-group">
+                <span class="title-icon">🚢</span>
+
+                <div>
+                    <h1>Vessel Risk Management</h1>
+                    <p class="subtitle">
+                        Shipment ETA & Delay Monitoring Dashboard
+                    </p>
+                </div>
+            </div>
         </header>
 
         <div class="stats-section">
@@ -265,36 +271,35 @@
     </div>
     <section class="reports-section">
 
-    <div class="reports-card">
+        <div class="reports-card">
 
-        <h3>📄 Reports & Export Center</h3>
+            <h3>📄 Reports & Export Center</h3>
 
-        <div class="export-buttons">
+            <div class="export-buttons">
 
-            <button class="export-btn"
-                    onclick="exportCSV()">
+                <button class="export-btn" onclick="exportCSV()">
 
-                Export CSV
+                    Export CSV
 
-            </button>
+                </button>
 
-            <button class="export-btn disabled-btn">
+                <button class="export-btn disabled-btn">
 
-                Export PDF (Coming Soon)
+                    Export PDF (Coming Soon)
 
-            </button>
+                </button>
+
+            </div>
+
+            <p id="lastExport">
+
+                Last Export: Never
+
+            </p>
 
         </div>
 
-        <p id="lastExport">
-
-            Last Export: Never
-
-        </p>
-
-    </div>
-
-</section>
+    </section>
 
     <div id="toast" class="toast"></div>
     <script src="app.js"></script>
