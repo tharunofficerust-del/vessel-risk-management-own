@@ -26,40 +26,35 @@ public class CreateVesselRequest {
     @NotBlank(message = "Vessel name cannot be empty")
     private String vesselName;
 
-    @NotNull
+    @NotNull(message = "Cargo type is required")
     private CargoType cargoType;
 
-    @NotNull
+    @NotNull(message = "Delay reason is required")
     private DelayReason delayReason;
 
-    @NotNull
+    @NotNull(message = "ETA is required")
     private LocalDateTime eta;
 
-    @NotNull
+    @NotNull(message = "Arrival date is required")
     private LocalDateTime arrivalDate;
 
-    @NotNull
+    @NotNull(message = "Departure date is required")
     private LocalDateTime departureDate;
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-public ResponseEntity<ErrorResponse>
-handleValidation(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ErrorResponse> handleValidation(MethodArgumentNotValidException ex) {
 
-    String message =
-        ex.getBindingResult()
-          .getFieldError()
-          .getDefaultMessage();
+        String message = ex.getBindingResult()
+                .getFieldError()
+                .getDefaultMessage();
 
-    ErrorResponse errorResponse =
-        new ErrorResponse(
-            message,
-            HttpStatus.BAD_REQUEST.value(),
-            LocalDateTime.now()
-        );
+        ErrorResponse errorResponse = new ErrorResponse(
+                message,
+                HttpStatus.BAD_REQUEST.value(),
+                LocalDateTime.now());
 
-    return new ResponseEntity<>(
-        errorResponse,
-        HttpStatus.BAD_REQUEST
-    );
-}
+        return new ResponseEntity<>(
+                errorResponse,
+                HttpStatus.BAD_REQUEST);
+    }
 }
