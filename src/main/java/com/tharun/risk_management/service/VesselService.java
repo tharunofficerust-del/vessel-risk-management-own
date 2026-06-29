@@ -149,6 +149,10 @@ public class VesselService {
                                         "ETA is required for scheduled and in-transit vessels.");
                 }
 
+                if (request.getStatus() == null) {
+                        request.setStatus(VesselStatus.SCHEDULED);
+                }
+
                 //rules for status - up ;
 
                 long delayHours = calculateDelayHours(

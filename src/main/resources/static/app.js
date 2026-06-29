@@ -214,8 +214,8 @@ async function loadVessels() {
                 </td>
 
                 <td>
-                    <span class="status-badge status-${vessel.status.toLowerCase()}">
-                        ${vessel.status.replace("_", " ")}
+                    <span class="status-badge status-${(vessel.status || "SCHEDULED").toLowerCase()}">
+                        ${(vessel.status || "SCHEDULED").replace("_", " ")}
                     </span>
                 </td>
 
