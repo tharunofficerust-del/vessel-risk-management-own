@@ -1,0 +1,105 @@
+/* ===========================
+   DARK MODE
+=========================== */
+
+body.dark-mode {
+
+    background: #1B1F24;
+    color: #F5F5F5;
+
+}
+
+
+/* ===========================
+   CARDS
+=========================== */
+
+body.dark-mode .summary-card,
+body.dark-mode .table-card,
+body.dark-mode .analytics-card,
+body.dark-mode .notifications-card,
+body.dark-mode .upcoming-card,
+body.dark-mode .reports-card {
+
+    background: #2A2F36;
+    color: #F5F5F5;
+
+    border-color: #444;
+
+}
+
+
+/* ===========================
+   TABLE
+=========================== */
+
+body.dark-mode table {
+
+    background: #2A2F36;
+    color: white;
+
+}
+
+body.dark-mode th {
+
+    background: #1F242A;
+    color: white;
+
+}
+
+body.dark-mode tr {
+
+    border-bottom: 1px solid #444;
+
+}
+
+
+/* ===========================
+   INPUTS
+=========================== */
+
+body.dark-mode input,
+body.dark-mode select {
+
+    background: #353B43;
+    color: white;
+
+    border: 1px solid #555;
+
+}
+
+
+body.dark-mode input::placeholder {
+
+    color: #BBB;
+
+}
+
+
+/* ===========================
+   FILTER BUTTONS
+=========================== */
+
+body.dark-mode .filter-pill {
+
+    background: #353B43;
+    color: white;
+
+}
+
+body.dark-mode .filter-pill.active {
+
+    background: #43A047;
+
+}
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+body.dark-mode .footer {
+
+    color: #CCC;
+
+}
