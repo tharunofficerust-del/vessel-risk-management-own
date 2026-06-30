@@ -1,111 +1,105 @@
 /* ===========================
-   DARK MODE
+   DARK MODE THEME
 =========================== */
 
 body.dark-mode {
-
-    background: #1B1F24;
-    color: #F5F5F5;
-
+    background: #1e232b;
+    color: #f3f4f6;
 }
 
-
-/* ===========================
-   CARDS
-=========================== */
-
-body.dark-mode .summary-card,
+/* Main Cards */
+body.dark-mode .card,
+body.dark-mode .form-card,
 body.dark-mode .table-card,
+body.dark-mode .notification-card,
 body.dark-mode .analytics-card,
-body.dark-mode .notifications-card,
-body.dark-mode .upcoming-card,
-body.dark-mode .reports-card {
-
-    background: #2A2F36;
-    color: #F5F5F5;
-
+body.dark-mode .status-card,
+body.dark-mode .delay-card,
+body.dark-mode .cargo-card,
+body.dark-mode .export-card,
+body.dark-mode .upcoming-card {
+    background: #2b313d;
+    color: #f3f4f6;
     border-color: #444;
-
 }
 
-
-/* ===========================
-   TABLE
-=========================== */
-
-body.dark-mode table {
-
-    background: #2A2F36;
-    color: white;
-
-}
-
-body.dark-mode th {
-
-    background: #1F242A;
-    color: white;
-
-}
-
-body.dark-mode tr {
-
-    border-bottom: 1px solid #444;
-
-}
-
-
-/* ===========================
-   INPUTS
-=========================== */
-
+/* Form Inputs */
 body.dark-mode input,
-body.dark-mode select {
-
-    background: #353B43;
+body.dark-mode select,
+body.dark-mode textarea {
+    background: #394150;
     color: white;
-
     border: 1px solid #555;
-
 }
-
 
 body.dark-mode input::placeholder {
-
-    color: #BBB;
-
+    color: #cbd5e1;
 }
 
-
-/* ===========================
-   FILTER BUTTONS
-=========================== */
-
-body.dark-mode .filter-pill {
-
-    background: #353B43;
+/* Table */
+body.dark-mode table {
     color: white;
-
 }
 
-body.dark-mode .filter-pill.active {
-
-    background: #43A047;
-
+body.dark-mode tbody tr {
+    border-color: #444;
 }
 
-
-/* ===========================
-   FOOTER
-=========================== */
-
-body.dark-mode .footer {
-
-    color: #CCC;
-
+body.dark-mode tbody tr:hover {
+    background: rgba(255,255,255,0.05);
 }
 
-body.dark-mode .form-section {
+/* Search Box */
+body.dark-mode .search-box input {
+    background: #394150;
+    color: white;
+}
 
-    background: #2B313A;
+/* Notification Items */
+body.dark-mode .notification-item {
+    background: #394150;
+    border-color: #555;
+    color: white;
+}
 
+/* Upcoming Cards */
+body.dark-mode .arrival-item {
+    background: #394150;
+    border-color: #555;
+    color: white;
+}
+
+/* Analytics Lists */
+body.dark-mode .analytics-row,
+body.dark-mode .status-row,
+body.dark-mode .delay-row,
+body.dark-mode .cargo-row {
+    border-color: #444;
+}
+
+/* Export Section */
+body.dark-mode .export-info {
+    color: #d1d5db;
+}
+
+/* Theme Button */
+.theme-toggle {
+    margin-left: 20px;
+    padding: 12px 24px;
+    border: 3px solid #111;
+    border-radius: 14px;
+    background: #7ff36b;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 #111;
+    transition: 0.2s;
+}
+
+.theme-toggle:hover {
+    transform: translateY(-2px);
+}
+
+body.dark-mode .theme-toggle {
+    background: #facc15;
+    color: #111;
 }

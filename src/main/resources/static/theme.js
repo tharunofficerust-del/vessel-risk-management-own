@@ -1,58 +1,13 @@
-const themeButton =
-    document.getElementById("themeToggle");
+const themeBtn = document.getElementById("themeToggle");
 
+themeBtn.addEventListener("click", () => {
 
-function applyTheme(theme) {
+    document.body.classList.toggle("dark-mode");
 
-    if (theme === "dark") {
-
-        document.body.classList.add("dark-mode");
-
-        themeButton.innerHTML =
-            "☀️ Light Mode";
-
+    if (document.body.classList.contains("dark-mode")) {
+        themeBtn.innerHTML = "☀️ Light Mode";
+    } else {
+        themeBtn.innerHTML = "🌙 Dark Mode";
     }
-
-    else {
-
-        document.body.classList.remove("dark-mode");
-
-        themeButton.innerHTML =
-            "🌙 Dark Mode";
-
-    }
-
-}
-
-
-themeButton.addEventListener("click", () => {
-
-    const currentTheme =
-        localStorage.getItem("theme") || "light";
-
-    const newTheme =
-        currentTheme === "light"
-            ? "dark"
-            : "light";
-
-    localStorage.setItem(
-        "theme",
-        newTheme
-    );
-
-    applyTheme(newTheme);
 
 });
-
-
-document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-        const savedTheme =
-            localStorage.getItem("theme") || "light";
-
-        applyTheme(savedTheme);
-
-    }
-);
