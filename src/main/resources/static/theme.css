@@ -1,33 +1,54 @@
-/* ===========================
-   DARK MODE THEME
-=========================== */
+/* =========================
+   DARK MODE
+========================= */
 
 body.dark-mode {
-    background: #1e232b;
-    color: #f3f4f6;
+    background: #1f2937;
+    color: #f8fafc;
 }
 
-/* Main Cards */
-body.dark-mode .card,
-body.dark-mode .form-card,
-body.dark-mode .table-card,
-body.dark-mode .notification-card,
+/* =========================
+   MAIN DASHBOARD CARDS
+========================= */
+
+body.dark-mode .table-container,
+body.dark-mode .notification-section,
+body.dark-mode .upcoming-section,
 body.dark-mode .analytics-card,
 body.dark-mode .status-card,
 body.dark-mode .delay-card,
 body.dark-mode .cargo-card,
 body.dark-mode .export-card,
-body.dark-mode .upcoming-card {
-    background: #2b313d;
-    color: #f3f4f6;
+body.dark-mode footer {
+
+    background: #27303d;
+    color: #f8fafc;
     border-color: #444;
 }
 
-/* Form Inputs */
+/* =========================
+   KEEP ADD VESSEL LIGHT
+========================= */
+
+body.dark-mode .form-container {
+    background: #f4f1e8;
+    color: #111827;
+}
+
+body.dark-mode .form-container h2,
+body.dark-mode .form-container label {
+    color: #111827;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
 body.dark-mode input,
 body.dark-mode select,
 body.dark-mode textarea {
-    background: #394150;
+
+    background: #374151;
     color: white;
     border: 1px solid #555;
 }
@@ -36,12 +57,28 @@ body.dark-mode input::placeholder {
     color: #cbd5e1;
 }
 
-/* Table */
+body.dark-mode input[type="datetime-local"] {
+    color-scheme: dark;
+}
+
+/* =========================
+   TABLE
+========================= */
+
 body.dark-mode table {
     color: white;
 }
 
+body.dark-mode thead {
+    background: #1b2430;
+}
+
 body.dark-mode tbody tr {
+    background: #27303d;
+}
+
+body.dark-mode tbody td {
+    color: #f8fafc;
     border-color: #444;
 }
 
@@ -49,57 +86,149 @@ body.dark-mode tbody tr:hover {
     background: rgba(255,255,255,0.05);
 }
 
-/* Search Box */
+/* =========================
+   SEARCH
+========================= */
+
 body.dark-mode .search-box input {
-    background: #394150;
+    background: #374151;
     color: white;
 }
 
-/* Notification Items */
+/* =========================
+   FILTER BUTTONS
+========================= */
+
+body.dark-mode .filter-btn {
+
+    background: #374151;
+    color: white;
+    border-color: #555;
+}
+
+body.dark-mode .filter-btn.active {
+
+    background: #16a34a;
+    color: white;
+}
+
+/* =========================
+   NOTIFICATIONS
+========================= */
+
 body.dark-mode .notification-item {
-    background: #394150;
-    border-color: #555;
+
+    background: #343c4a;
     color: white;
+    border-color: #555;
 }
 
-/* Upcoming Cards */
+/* =========================
+   UPCOMING ARRIVALS
+========================= */
+
 body.dark-mode .arrival-item {
-    background: #394150;
-    border-color: #555;
+
+    background: #343c4a;
     color: white;
+    border-color: #555;
 }
 
-/* Analytics Lists */
+body.dark-mode .arrival-item small {
+    color: #d1d5db;
+}
+
+/* =========================
+   ANALYTICS LINES
+========================= */
+
 body.dark-mode .analytics-row,
 body.dark-mode .status-row,
 body.dark-mode .delay-row,
 body.dark-mode .cargo-row {
+
     border-color: #444;
 }
 
-/* Export Section */
-body.dark-mode .export-info {
+/* =========================
+   HEADER BARS
+========================= */
+
+body.dark-mode .risk-header {
+
+    background: #dbece2;
+    color: #166534;
+}
+
+body.dark-mode .status-header {
+
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+body.dark-mode .delay-header {
+
+    background: #fef3c7;
+    color: #c2410c;
+}
+
+body.dark-mode .cargo-header {
+
+    background: #f3e8ff;
+    color: #9333ea;
+}
+
+body.dark-mode .export-header {
+
+    background: #d1fae5;
+    color: #0f766e;
+}
+
+/* =========================
+   EXPORT SECTION
+========================= */
+
+body.dark-mode .export-info,
+body.dark-mode .last-export {
+
     color: #d1d5db;
 }
 
-/* Theme Button */
+/* =========================
+   FOOTER
+========================= */
+
+body.dark-mode footer {
+
+    color: #cbd5e1;
+}
+
+/* =========================
+   THEME BUTTON
+========================= */
+
 .theme-toggle {
-    margin-left: 20px;
+
     padding: 12px 24px;
     border: 3px solid #111;
     border-radius: 14px;
     background: #7ff36b;
+
     font-weight: 700;
     cursor: pointer;
+
     box-shadow: 4px 4px 0 #111;
+
     transition: 0.2s;
 }
 
 .theme-toggle:hover {
+
     transform: translateY(-2px);
 }
 
 body.dark-mode .theme-toggle {
+
     background: #facc15;
-    color: #111;
+    color: #111827;
 }
