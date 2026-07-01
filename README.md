@@ -1455,34 +1455,35 @@ Historical Analytics
 
 ---
 
-# 📸 Screenshots
+# 📸 Application Screenshots
 
-Add project screenshots here:
+## Dashboard (Light Mode)
 
-```text
-Dashboard (Light Mode)
+![Dashboard Light](https://github.com/user-attachments/assets/9ad7b3b0-a46f-4b99-adc2-0c8945230bad)
 
-<img width="1906" height="1008" alt="image" src="https://github.com/user-attachments/assets/9ad7b3b0-a46f-4b99-adc2-0c8945230bad" />
+---
 
-Dashboard (Dark Mode)
+## Dashboard (Dark Mode)
 
-<img width="1906" height="1008" alt="image" src="https://github.com/user-attachments/assets/b1fcc60a-3b79-4dea-b5ad-39f3342065bb" />
+![Dashboard Dark](https://github.com/user-attachments/assets/b1fcc60a-3b79-4dea-b5ad-39f3342065bb)
 
-PDF Report
+---
 
-<img width="645" height="930" alt="image" src="https://github.com/user-attachments/assets/a8a0020e-6f74-475b-b703-52fa9721cb77" />
+## PDF Report
 
-Mobile View
+<img width="450" src="https://github.com/user-attachments/assets/a8a0020e-6f74-475b-b703-52fa9721cb77">
 
-<img width="484" height="870" alt="image" src="https://github.com/user-attachments/assets/6b389074-674c-4cbe-8fcc-9d5116251a78" />
+---
 
-Analytics Dashboard & Export Center
+## Mobile View
 
-<img width="1888" height="635" alt="image" src="https://github.com/user-attachments/assets/8f064d91-3ce2-4956-ae26-936b6720e1d4" />
+<img width="300" src="https://github.com/user-attachments/assets/6b389074-674c-4cbe-8fcc-9d5116251a78">
 
+---
 
-```
+## Analytics Dashboard & Export Center
 
+![Analytics Dashboard](https://github.com/user-attachments/assets/8f064d91-3ce2-4956-ae26-936b6720e1d4)
 ---
 
 # 👨‍💻 Author
