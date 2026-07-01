@@ -2,20 +2,22 @@ package com.tharun.risk_management.service;
 
 import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
-
+import com.lowagie.text.pdf.draw.LineSeparator;
 import com.tharun.risk_management.entity.VesselEntity;
 import com.tharun.risk_management.enums.RiskLevel;
 import com.tharun.risk_management.enums.VesselStatus;
 import com.tharun.risk_management.repository.VesselRepository;
 
 import lombok.RequiredArgsConstructor;
-
+import java.util.Map;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Service
 @RequiredArgsConstructor
@@ -166,9 +168,11 @@ public class PdfExportService {
                                                 Element.ALIGN_CENTER);
 
                                 table.addCell(riskCell);
-                        }
-                        // ------------------------------- Analytics and Insights Section
-                        // --------------------------------
+
+                                }
+// -------------------------------
+// Analytics and Insights Section
+// -------------------------------
 
                         long lowCount = vessels.stream()
                                         .filter(v -> v.getRiskLevel() == RiskLevel.LOW)
@@ -189,7 +193,53 @@ public class PdfExportService {
                         long noneCount = vessels.stream()
                                         .filter(v -> v.getRiskLevel() == RiskLevel.NONE)
                                         .count();
+
+                        // Delay Analytics
+
+                        long totalDelayHours = vessels.stream()
+                                        .mapToLong(VesselEntity::getDelayHours)
+                                        .sum();
+
+                        double averageDelay = vessels.isEmpty()
+                                        ? 0
+                                        : (double) totalDelayHours / vessels.size();
+
+                        long maxDelay = vessels.stream()
+                                        .mapToLong(VesselEntity::getDelayHours)
+                                        .max()
+                                        .orElse(0);
+
+                        long minDelay = vessels.stream()
+                                        .mapToLong(VesselEntity::getDelayHours)
+                                        .min()
+                                        .orElse(0);
+
+                        // Most Common Risk
+
+                        RiskLevel mostCommonRisk = vessels.stream()
+                                        .collect(Collectors.groupingBy(
+                                                        VesselEntity::getRiskLevel,
+                                                        Collectors.counting()))
+                                        .entrySet()
+                                        .stream()
+                                        .max(Map.Entry.comparingByValue())
+                                        .map(Map.Entry::getKey)
+                                        .orElse(RiskLevel.NONE);
+
+                        // Most Common Status
+
+                        VesselStatus mostCommonStatus = vessels.stream()
+                                        .collect(Collectors.groupingBy(
+                                                        VesselEntity::getStatus,
+                                                        Collectors.counting()))
+                                        .entrySet()
+                                        .stream()
+                                        .max(Map.Entry.comparingByValue())
+                                        .map(Map.Entry::getKey)
+                                        .orElse(VesselStatus.SCHEDULED);
+
                         document.add(table);
+
                         document.add(new Paragraph(" "));
                         document.add(new Paragraph(" "));
 
@@ -199,39 +249,161 @@ public class PdfExportService {
                                         Font.BOLD,
                                         new Color(30, 41, 59));
 
-                        document.add(new Paragraph("RISK ANALYTICS", sectionFont));
+                        // =====================
+                        // EXECUTIVE SUMMARY
+                        // =====================
 
-                        document.add(new Paragraph("Low Risk        : " + lowCount));
+                        document.add(
+                                        new Paragraph(
+                                                        "EXECUTIVE SUMMARY",
+                                                        sectionFont));
 
-                        document.add(new Paragraph("Medium Risk     : " + mediumCount));
+                        document.add(
+                                        new Paragraph(
+                                                        "Total Vessels       : "
+                                                                        + vessels.size()));
 
-                        document.add(new Paragraph("High Risk       : " + highCount));
+                        document.add(
+                                        new Paragraph(
+                                                        "Critical Vessels    : "
+                                                                        + criticalCount));
 
-                        document.add(new Paragraph("Critical Risk   : " + criticalCount));
+                        document.add(
+                                        new Paragraph(
+                                                        "Average Delay       : "
+                                                                        + String.format("%.2f", averageDelay)
+                                                                        + " hrs"));
 
-                        document.add(new Paragraph("No Risk         : " + noneCount));
+                        document.add(
+                                        new Paragraph(
+                                                        "Most Common Risk    : "
+                                                                        + mostCommonRisk));
 
+                        document.add(
+                                        new Paragraph(
+                                                        "Most Common Status  : "
+                                                                        + mostCommonStatus));
 
-                document.add(new Paragraph(" "));
+                        document.add(new Paragraph(" "));
 
-                document.add(new Paragraph("STATUS ANALYTICS", sectionFont));
+// =====================
+// RISK ANALYTICS
+// =====================
 
-                for (VesselStatus status : VesselStatus.values()) {
+                        document.add(
+                                        new Paragraph(
+                                                        "RISK ANALYTICS",
+                                                        sectionFont));
 
-                long count = vessels.stream()
-                        .filter(v -> v.getStatus() == status)
-                        .count();
+                        document.add(
+                                        new Paragraph(
+                                                        "Low Risk        : "
+                                                                        + lowCount));
 
-                document.add(
-                        new Paragraph(
-                                status + " : " + count
-                        )
-                );
-                }
+                        document.add(
+                                        new Paragraph(
+                                                        "Medium Risk     : "
+                                                                        + mediumCount));
 
+                        document.add(
+                                        new Paragraph(
+                                                        "High Risk       : "
+                                                                        + highCount));
 
+                        document.add(
+                                        new Paragraph(
+                                                        "Critical Risk   : "
+                                                                        + criticalCount));
 
+                        document.add(
+                                        new Paragraph(
+                                                        "No Risk         : "
+                                                                        + noneCount));
 
+                        document.add(new Paragraph(" "));
+
+                        // =====================
+                        // STATUS ANALYTICS
+                        // =====================
+
+                        document.add(
+                                        new Paragraph(
+                                                        "STATUS ANALYTICS",
+                                                        sectionFont));
+
+                        for (VesselStatus status : VesselStatus.values()) {
+
+                                long count = vessels.stream()
+                                                .filter(v -> v.getStatus() == status)
+                                                .count();
+
+                                document.add(
+                                                new Paragraph(
+                                                                status + " : " + count));
+                        }
+
+                        document.add(new Paragraph(" "));
+
+                        // =====================
+                        // DELAY ANALYTICS
+                        // =====================
+
+                        document.add(
+                                        new Paragraph(
+                                                        "DELAY ANALYTICS",
+                                                        sectionFont));
+
+                        document.add(
+                                        new Paragraph(
+                                                        "Total Delay Hours : "
+                                                                        + totalDelayHours
+                                                                        + " hrs"));
+
+                        document.add(
+                                        new Paragraph(
+                                                        "Average Delay     : "
+                                                                        + String.format("%.2f", averageDelay)
+                                                                        + " hrs"));
+
+                        document.add(
+                                        new Paragraph(
+                                                        "Maximum Delay     : "
+                                                                        + maxDelay
+                                                                        + " hrs"));
+
+                        document.add(
+                                        new Paragraph(
+                                                        "Minimum Delay     : "
+                                                                        + minDelay
+                                                                        + " hrs"));
+
+                        document.add(new Paragraph(" "));
+
+                        // =====================
+                        // FOOTER
+                        // =====================
+
+                        LineSeparator line = new LineSeparator();
+
+                        document.add(line);
+
+                        document.add(new Paragraph(" "));
+
+                        Font footerFont = new Font(
+                                        Font.HELVETICA,
+                                        9,
+                                        Font.ITALIC,
+                                        Color.GRAY);
+
+                        Paragraph footer = new Paragraph(
+                                        "Generated using Vessel Risk Management System v1.0\n"
+                                                        + "Built with Spring Boot + PostgreSQL + OpenPDF\n"
+                                                        + "© 2026 Tharun Vijay",
+                                        footerFont);
+
+                        footer.setAlignment(Element.ALIGN_CENTER);
+
+                        document.add(footer);
 
                         document.close();
 
@@ -242,4 +414,4 @@ public class PdfExportService {
                         throw new RuntimeException("Failed to generate PDF", e);
                 }
         }
-}
+} 
