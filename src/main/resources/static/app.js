@@ -872,6 +872,14 @@ async function exportPdf() {
             "error"
         );
     }
+
+    localStorage.setItem("lastExport",`Last Export: ${exportTime} (PDF)`);
+
+    const lastExport = localStorage.getItem("lastExport");
+
+    if (lastExport) {
+        document.getElementById("lastExport").innerText = lastExport;
+    }
 }
 
 document
@@ -881,10 +889,4 @@ document
         exportPdf
     );
 
-    localStorage.setItem("lastExport",`Last Export: ${exportTime} (PDF)`);
-
-    const lastExport = localStorage.getItem("lastExport");
-
-    if (lastExport) {
-        document.getElementById("lastExport").innerText = lastExport;
-    }
+    
