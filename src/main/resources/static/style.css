@@ -26,11 +26,62 @@ header {
     height: 56px;
     display: flex;
     align-items: flex-start; justify-content:space-between;
-    gap: 14px;
+    gap: 20px; width: 100%;
 }
 
 .theme-toggle {
-    margin-left: auto;
+
+    width: auto !important;
+
+    min-width: auto !important;
+
+    padding: 10px 16px;
+
+    margin: 0;
+
+    background: #7ee86b;
+
+    color: #111827;
+
+    border: 2px solid #1a1a1a;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    box-shadow: 3px 3px 0 #1a1a1a;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.theme-toggle::before {
+
+    display: none;
+
+}
+
+.theme-toggle:hover {
+
+    transform: translate(-2px, -2px);
+
+    box-shadow: 5px 5px 0 #1a1a1a;
+}
+
+.theme-toggle:active {
+
+    transform: translate(0, 0);
+
+    box-shadow: 2px 2px 0 #1a1a1a;
 }
 
 header::before {
@@ -611,11 +662,22 @@ tbody tr:hover {
     background: transparent;
 }
 
-.header {
+.header-left {
+
     display: flex;
-    align-items: center;
+
     gap: 14px;
-    margin-bottom: 18px;
+
+    align-items: center;
+}
+
+.theme-toggle {
+
+    width: auto;
+
+    margin-left: auto;
+
+    flex-shrink: 0;
 }
 
 .header-accent {
@@ -1735,4 +1797,34 @@ height:180px;
 .upcoming-card h3 {
     background: #ffebee;
     color: #c62828;
+}
+
+
+/* ==========================
+   MOBILE RESPONSIVE FIXES
+========================== */
+
+@media (max-width: 768px) {
+
+    .stats-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .stat-card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .theme-toggle {
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .header {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
 }
