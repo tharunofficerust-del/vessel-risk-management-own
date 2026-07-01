@@ -819,3 +819,43 @@ function handleStatusChange() {
 
 }
 
+// Pdf Export logic
+
+async function exportPdf() {
+    try {
+
+        const response = await fetch(
+            `${API_BASE_URL}/vessels/export/pdf`
+        );
+
+        if (!response.ok) {
+            throw new Error("PDF export failed");
+        }
+
+        const blob = await response.blob();
+
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+
+        a.href = url;
+        a.download = "vessel-report.pdf";
+
+        document.body.appendChild(a);
+
+        a.click();
+
+        a.remove();
+
+        window.URL.revokeObjectURL(url);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showToast(
+            "Failed to export PDF",
+            "error"
+        );
+    }
+}
