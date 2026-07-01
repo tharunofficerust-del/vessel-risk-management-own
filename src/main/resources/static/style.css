@@ -1828,3 +1828,14 @@ height:180px;
     }
 
 }
+
+#lastExport {
+
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+    font-style: italic;
+}

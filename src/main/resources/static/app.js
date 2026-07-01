@@ -822,7 +822,9 @@ function handleStatusChange() {
 // Pdf Export logic
 
 async function exportPdf() {
+
     console.log("PDF button clicked");
+
     try {
 
         const response = await fetch(
@@ -850,6 +852,17 @@ async function exportPdf() {
 
         window.URL.revokeObjectURL(url);
 
+        // Update last export time
+        const exportTime = new Date().toLocaleString();
+
+        document.getElementById("lastExport").innerText =
+            `Last Export: ${exportTime} (PDF)`;
+
+        showToast(
+            "PDF exported successfully",
+            "success"
+        );
+
     } catch (error) {
 
         console.error(error);
@@ -867,3 +880,11 @@ document
         "click",
         exportPdf
     );
+
+    localStorage.setItem("lastExport",`Last Export: ${exportTime} (PDF)`);
+
+    const lastExport = localStorage.getItem("lastExport");
+
+    if (lastExport) {
+        document.getElementById("lastExport").innerText = lastExport;
+    }
