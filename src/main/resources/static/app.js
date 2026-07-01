@@ -822,10 +822,11 @@ function handleStatusChange() {
 // Pdf Export logic
 
 async function exportPdf() {
+    console.log("PDF button clicked");
     try {
 
         const response = await fetch(
-            `${API_BASE_URL}/vessels/export/pdf`
+            `${API}/export/pdf`
         );
 
         if (!response.ok) {

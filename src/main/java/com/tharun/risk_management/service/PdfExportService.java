@@ -1,17 +1,16 @@
 package com.tharun.risk_management.service;
 
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.*;
+
 import com.tharun.risk_management.entity.VesselEntity;
-import com.tharun.risk_management.enums.RiskLevel;
 import com.tharun.risk_management.repository.VesselRepository;
+
 import lombok.RequiredArgsConstructor;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.springframework.stereotype.Service;
-import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
+
+import java.awt.Color;
 import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,174 +19,164 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PdfExportService {
 
-    private final VesselRepository vesselRepository;
+        private final VesselRepository vesselRepository;
 
-    public byte[] generatePdfReport() {
+        public byte[] generatePdfReport() {
 
-        List<VesselEntity> vessels = vesselRepository.findAll();
+                try {
 
-        try (
-                PDDocument document = new PDDocument();
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                        List<VesselEntity> vessels = vesselRepository.findAll();
 
-            PDPage page = new PDPage(PDRectangle.A4);
+                        ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-            document.addPage(page);
+                        Document document = new Document(PageSize.A4);
 
-            PDPageContentStream content = new PDPageContentStream(document, page);
+                        PdfWriter.getInstance(document, out);
 
-            float y = 780;
+                        document.open();
 
-            // =====================================
-            // TITLE
-            // =====================================
+                        // =====================
+                        // TITLE
+                        // =====================
 
-            content.setFont(
-                new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD),
-                22
-            );
+                        Font titleFont = new Font(Font.HELVETICA, 20, Font.BOLD, Color.WHITE);
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText("VESSEL RISK MANAGEMENT REPORT");
-            content.endText();
+                        PdfPTable titleTable = new PdfPTable(1);
 
-            y -= 30;
+                        titleTable.setWidthPercentage(100);
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                        PdfPCell titleCell = new PdfPCell(
+                                        new Phrase(
+                                                        "Vessel Risk Management Report",
+                                                        titleFont));
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText("Maritime Operations Dashboard");
-            content.endText();
+                        titleCell.setBackgroundColor(new Color(0, 100, 0));
 
-            y -= 20;
+                        titleCell.setPadding(15);
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText(
-                    "Generated On: "
-                            + LocalDateTime.now());
-            content.endText();
+                        titleCell.setBorder(Rectangle.NO_BORDER);
 
-            y -= 40;
+                        titleCell.setHorizontalAlignment(Element.ALIGN_CENTER);
 
-            // =====================================
-            // SUMMARY
-            // =====================================
+                        titleTable.addCell(titleCell);
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 16);
+                        document.add(titleTable);
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText("SUMMARY");
-            content.endText();
+                        document.add(new Paragraph(" "));
 
-            y -= 25;
+                        // =====================
+                        // SUMMARY
+                        // =====================
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 12);
+                        document.add(new Paragraph("Total Vessels : " + vessels.size()));
 
-            content.beginText();
-            content.newLineAtOffset(60, y);
-            content.showText(
-                    "Total Vessels : "
-                            + vessels.size());
-            content.endText();
+                        document.add(new Paragraph("Generated On : "+ LocalDateTime.now()));
 
-            y -= 20;
+                        document.add(new Paragraph("Generated By : Vessel Risk Management System"));
 
-            long criticalCount = vessels.stream()
-                    .filter(v -> v.getRiskLevel() == RiskLevel.CRITICAL)
-                    .count();
+                        document.add(new Paragraph("Built By : Tharun Vijay"));
 
-            content.beginText();
-            content.newLineAtOffset(60, y);
-            content.showText(
-                    "Critical Vessels : "
-                            + criticalCount);
-            content.endText();
+                        document.add(new Paragraph(" "));
 
-            y -= 40;
+                        // =====================
+                        // TABLE
+                        // =====================
 
-            // =====================================
-            // TABLE HEADER
-            // =====================================
+                        PdfPTable table = new PdfPTable(4);
+                        
+                        table.setWidths(new float[]{1f,3f,2f,2f});
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 14);
+                        table.setWidthPercentage(100);
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText("VESSEL DETAILS");
-            content.endText();
+                        table.setSpacingBefore(10);
 
-            y -= 25;
+                        Font headerFont = new Font(Font.HELVETICA, 12, Font.BOLD, Color.WHITE);
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 10);
+                        Color headerColor = new Color(30, 41, 59); // Maritime Dark
 
-            content.beginText();
-            content.newLineAtOffset(50, y);
-            content.showText(
-                    "ID     NAME                 STATUS          RISK");
-            content.endText();
+                        String[] headers = {
+                                        "ID",
+                                        "Vessel Name",
+                                        "Status",
+                                        "Risk Level"
+                        };
 
-            y -= 20;
+                        for (String header : headers) {
 
-            // =====================================
-            // TABLE DATA
-            // =====================================
+                                PdfPCell cell = new PdfPCell(
+                                                new Phrase(header, headerFont));
 
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA), 10);
+                                cell.setBackgroundColor(headerColor);
 
-            for (VesselEntity vessel : vessels) {
+                                cell.setPadding(10);
 
-                String row = String.format(
-                        "%-6s %-20s %-15s %-10s",
-                        vessel.getVesselID(),
-                        vessel.getVesselName(),
-                        vessel.getStatus(),
-                        vessel.getRiskLevel());
+                                cell.setHorizontalAlignment(
+                                                Element.ALIGN_CENTER);
 
-                content.beginText();
+                                table.addCell(cell);
+                        }
 
-                content.newLineAtOffset(50, y);
+                        for (VesselEntity vessel : vessels) {
 
-                content.showText(row);
+                                table.addCell(
+                                                String.valueOf(
+                                                                vessel.getVesselID()));
 
-                content.endText();
+                                table.addCell(
+                                                vessel.getVesselName());
 
-                y -= 18;
+                                table.addCell(
+                                                vessel.getStatus().toString());
 
-                if (y < 100) {
-                    break;
+                                PdfPCell riskCell = new PdfPCell(
+                                                new Phrase(
+                                                                vessel.getRiskLevel().toString()));
+
+                                switch (vessel.getRiskLevel()) {
+
+                                        case LOW:
+                                                riskCell.setBackgroundColor(
+                                                                new Color(220, 252, 231));
+                                                break;
+
+                                        case MEDIUM:
+                                                riskCell.setBackgroundColor(
+                                                                new Color(254, 249, 195));
+                                                break;
+
+                                        case HIGH:
+                                                riskCell.setBackgroundColor(
+                                                                new Color(254, 215, 170));
+                                                break;
+
+                                        case CRITICAL:
+                                                riskCell.setBackgroundColor(
+                                                                new Color(254, 202, 202));
+                                                break;
+
+                                        case NONE:
+                                                riskCell.setBackgroundColor(
+                                                                new Color(229, 231, 235));
+                                                break;
+                                }
+
+                                riskCell.setHorizontalAlignment(
+                                                Element.ALIGN_CENTER);
+
+                                table.addCell(riskCell);
+                        }
+
+                        document.add(table);
+
+                        document.close();
+
+                        return out.toByteArray();
+
+                } catch (Exception e) {
+
+                        throw new RuntimeException(
+                                        "Failed to generate PDF",
+                                        e);
                 }
-            }
-
-            // =====================================
-            // FOOTER
-            // =====================================
-
-            content.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_OBLIQUE) , 10);
-
-            content.beginText();
-
-            content.newLineAtOffset(50, 40);
-
-            content.showText(
-                    "Generated by Vessel Risk Management System | Tharun Vijay");
-
-            content.endText();
-
-            content.close();
-
-            document.save(outputStream);
-
-            return outputStream.toByteArray();
-
-        } catch (Exception ex) {
-
-            throw new RuntimeException(
-                    "Failed to generate PDF",
-                    ex);
         }
-    }
 }
