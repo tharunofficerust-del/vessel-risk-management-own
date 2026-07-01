@@ -863,6 +863,16 @@ async function exportPdf() {
             "success"
         );
 
+
+
+        localStorage.setItem("lastExport",`Last Export: ${exportTime} (PDF)`);
+
+            const lastExport = localStorage.getItem("lastExport");
+
+            if (lastExport) {
+                document.getElementById("lastExport").innerText = lastExport;
+            }
+
     } catch (error) {
 
         console.error(error);
@@ -873,13 +883,7 @@ async function exportPdf() {
         );
     }
 
-    localStorage.setItem("lastExport",`Last Export: ${exportTime} (PDF)`);
-
-    const lastExport = localStorage.getItem("lastExport");
-
-    if (lastExport) {
-        document.getElementById("lastExport").innerText = lastExport;
-    }
+    
 }
 
 document
@@ -889,4 +893,10 @@ document
         exportPdf
     );
 
-    
+const lastExport = localStorage.getItem("lastExport");
+
+if (lastExport) {
+
+    document.getElementById("lastExport").innerText =
+        lastExport;
+}
