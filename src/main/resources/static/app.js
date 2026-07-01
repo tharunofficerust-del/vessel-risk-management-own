@@ -859,3 +859,10 @@ async function exportPdf() {
         );
     }
 }
+
+document
+    .getElementById("exportPdfBtn")
+    .addEventListener(
+        "click",
+        exportPdf
+    );
