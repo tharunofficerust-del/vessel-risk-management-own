@@ -593,7 +593,7 @@ async function deleteVessel(id) {
 
         showToast(
             "🗑️ Vessel deleted successfully",
-            "warning"
+            "success"
         );
 
         await loadVessels();

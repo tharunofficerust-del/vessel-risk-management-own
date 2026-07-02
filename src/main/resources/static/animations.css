@@ -41,3 +41,65 @@
     animation-delay: 0.8s;
 }
 
+/* ==========================
+   SUCCESS TOAST ANIMATION
+========================== */
+
+@keyframes toastSuccess {
+
+    0% {
+        transform: translateX(120%);
+        opacity: 0;
+    }
+
+    70% {
+        transform: translateX(-12px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+
+/* ==========================
+   ERROR TOAST ANIMATION
+========================== */
+
+@keyframes toastError {
+
+    0% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-8px);
+    }
+
+    40% {
+        transform: translateX(8px);
+    }
+
+    60% {
+        transform: translateX(-6px);
+    }
+
+    80% {
+        transform: translateX(6px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.toast.success.show {
+    animation: toastSuccess 0.5s ease forwards;
+}
+
+.toast.error.show {
+    animation: toastError 0.45s ease;
+}
+
