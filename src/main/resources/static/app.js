@@ -10,15 +10,20 @@ function animateCounter(elementId, targetValue, suffix = "") {
 
     const element = document.getElementById(elementId);
 
-    let currentValue = 0;
+    const duration = 1000; // 1 second
+    const steps = 30;
+    const increment = targetValue / steps;
 
-    const increment = Math.ceil(targetValue / 30);
+    let currentValue = 0;
+    let currentStep = 0;
 
     const timer = setInterval(() => {
 
+        currentStep++;
+
         currentValue += increment;
 
-        if (currentValue >= targetValue) {
+        if (currentStep >= steps) {
 
             currentValue = targetValue;
 
@@ -26,9 +31,9 @@ function animateCounter(elementId, targetValue, suffix = "") {
         }
 
         element.innerText =
-            `${currentValue}${suffix}`;
+            `${Math.round(currentValue)}${suffix}`;
 
-    }, 20);
+    }, duration / steps);
 }
 
 
