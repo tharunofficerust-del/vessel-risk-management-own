@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
 public class PdfExportService {
@@ -169,14 +168,14 @@ public class PdfExportService {
 
                                 table.addCell(riskCell);
 
-                                }
+                        }
 // -------------------------------
 // Analytics and Insights Section
 // -------------------------------
 
                         long lowCount = vessels.stream()
                                         .filter(v -> v.getRiskLevel() == RiskLevel.LOW)
-                                        .count();
+                                        .count();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
 
                         long mediumCount = vessels.stream()
                                         .filter(v -> v.getRiskLevel() == RiskLevel.MEDIUM)
@@ -286,9 +285,9 @@ public class PdfExportService {
 
                         document.add(new Paragraph(" "));
 
-// =====================
-// RISK ANALYTICS
-// =====================
+                        // =====================
+                        // RISK ANALYTICS
+                        // =====================
 
                         document.add(
                                         new Paragraph(
@@ -414,4 +413,4 @@ public class PdfExportService {
                         throw new RuntimeException("Failed to generate PDF", e);
                 }
         }
-} 
+}

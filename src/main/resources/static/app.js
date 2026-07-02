@@ -5,6 +5,34 @@ let currentRiskFilter = "ALL";
 let editId = null;
 let riskChart = null;
 
+
+function animateCounter(elementId, targetValue, suffix = "") {
+
+    const element = document.getElementById(elementId);
+
+    let currentValue = 0;
+
+    const increment = Math.ceil(targetValue / 30);
+
+    const timer = setInterval(() => {
+
+        currentValue += increment;
+
+        if (currentValue >= targetValue) {
+
+            currentValue = targetValue;
+
+            clearInterval(timer);
+        }
+
+        element.innerText =
+            `${currentValue}${suffix}`;
+
+    }, 20);
+}
+
+
+
 async function loadVessels() {
 
     const response = await fetch(API);
@@ -128,8 +156,7 @@ async function loadVessels() {
             : Math.round(totalDelayHours / totalVessels);
 
 
-    document.getElementById("totalCount").innerText =
-        totalVessels;
+    animateCounter( "totalCount", totalVessels );
 
     document.getElementById("totalDelayCount").innerText =
         `${totalDelayHours} hrs`;
