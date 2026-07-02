@@ -4,6 +4,7 @@ let currentRiskFilter = "ALL";
 
 let editId = null;
 let riskChart = null;
+let chartAnimated = false;
 
 
 function animateCounter(elementId, targetValue, suffix = "") {
@@ -36,7 +37,42 @@ function animateCounter(elementId, targetValue, suffix = "") {
     }, duration / steps);
 }
 
+function observeRiskChart() {
 
+    const chartWrapper =
+        document.querySelector(".chart-wrapper");
+
+    if (!chartWrapper || chartAnimated) {
+        return;
+    }
+
+    const observer = new IntersectionObserver(
+
+        (entries) => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    chartAnimated = true;
+
+                    loadVessels();
+
+                    observer.disconnect();
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.4
+        }
+
+    );
+
+    observer.observe(chartWrapper);
+}
 
 async function loadVessels() {
 
@@ -377,7 +413,7 @@ async function loadVessels() {
     const chartCanvas =
         document.getElementById("riskChart");
 
-    if (chartCanvas) {
+    if (chartCanvas && chartAnimated) {
 
         if (riskChart) {
             riskChart.destroy();
@@ -627,8 +663,11 @@ function setRiskFilter(risk, button) {
 
 
 loadVessels();
-
+observeRiskChart();
 handleStatusChange();
+
+
+//-----------------------------------------------------------------
 
 function editVessel(id) {
 
